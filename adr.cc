@@ -141,7 +141,7 @@ std::vector<double> Ad_sol ( unsigned int J, double const alpha, double const be
   double h = L/(J+1); //mesh size
   for(unsigned int i=0; i<J; ++i)
   {
-    sol[i] = (1.-exp(c*h*i))/(1.-exp(c*L));
+    sol[i] = (1.-exp(c*h*(i+1)))/(1.-exp(c*L));
   }
   return sol;
 }
@@ -154,7 +154,7 @@ std::vector<double> Dr_sol ( unsigned int J, double const alpha, double const be
   double h = L/(J+1); //mesh size
   for(unsigned int i=0; i<J; ++i)
   {
-    sol[i] = (sinh(c*h*i))/(sinh(c*L));
+    sol[i] = (sinh(c*h*(i+1)))/(sinh(c*L));
   }
   return sol;
 }
@@ -172,10 +172,11 @@ std::vector<double> Solver ( unsigned int const J, double const alpha, double co
   std::vector<double> u_x(J); //vector containing the solution
   double P_number = ( fabs(beta)*L )/(2*alpha); //peclet number
 
-  std::string Filename = "P_numb_" + std::to_string (P_number) + "_h_" + std::to_string (h) + "_GSResidual_";
-  std::string Filename2 = "P_numb_" + std::to_string (P_number) + "_h_" + std::to_string (h) + "_GSsolution_";
+  std::string Filename = "P_numb_" + std::to_string (P_number) + "_h_" + std::to_string (h) + "_J_" + std::to_string (J) + "_GSResidual_";
+  std::string Filename2 = "P_numb_" + std::to_string (P_number) + "_h_" + std::to_string (h) + "_J_" + std::to_string (J) + "_GSsolution_";
 
   A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, Filename2, MaxIter);
+  //A.printMatrix();
 
   return u_x;
 }
@@ -183,23 +184,24 @@ std::vector<double> Solver ( unsigned int const J, double const alpha, double co
 //priting the error on a file
 void ErrorAnalysis (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName )
 {
-  std::ofstream myOutFile (ErrorFileName + ".txt");
+  double P_number = ( fabs(beta)*L )/(2*alpha); //peclet number
+  std::ofstream myOutFile (ErrorFileName + "_P_numb_" + std::to_string(P_number) +".txt");
   if ( !myOutFile.good() )
   {
     std::cout << "Failed to open the file." <<std::endl;
   }
 
-  myOutFile << "#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << std::endl;
-  myOutFile.width(15);
+  myOutFile << "#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << "." <<std::endl;
+  myOutFile.width(25);
   myOutFile << std::left << "# 1-Number of points" ;
-  myOutFile.width(15);
+  myOutFile.width(25);
   myOutFile << std::left << "2-Error (LinfNorm)" << std::endl;
 
   for(int j: Jvec)
   {
-    myOutFile.width(15);
+    myOutFile.width(25);
     myOutFile << std::left << j;
-    myOutFile.width(15);
+    myOutFile.width(25);
     myOutFile << std::left << LinfNorm( vectorSub( Solver(j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter), Ad_sol(j, alpha, beta, gamma, L) )) << std::endl;
   }
 

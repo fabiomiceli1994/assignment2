@@ -244,7 +244,7 @@ void SparseMatrix::Gauss_Seidel( std::vector<double>& x_0, const std::vector<dou
   myOutFile << std::left << resMaxNorm << std::endl;
 
   //myOutFile.flush();
-  myOutFile2 << "#Solution of linear sistem Ax = b through Gauss-Seidel algorithm. A is " << getRowSize() << "x" << getColSize() << " matrix. x and b are " << b.size() << "vectors." << std::endl;
+  myOutFile2 << "#Solution of linear sistem Ax = b through Gauss-Seidel algorithm." << std::endl;
   myOutFile2.width(25);
   myOutFile2 << std::left << "# 1-solution" << std::endl;
 

@@ -1,0 +1,6 @@
+#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=1, beta=23, gamma=0.
+# 1-Number of points     2-Error (LinfNorm)       
+10                       0.145797                 
+50                       0.00634925               
+100                      0.00159236               
+500                      6.4628e-05               
