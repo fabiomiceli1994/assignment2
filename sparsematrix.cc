@@ -170,6 +170,10 @@ double SparseMatrix::getValue (unsigned int x, unsigned int y) const //Get the v
   while((int)y!=(*curr_row)[pos]) //distance fromt the beginning of the vector
   {
     pos++;
+    if (!(pos < curr_row->size()))
+    {
+      return 0.0;
+    }
   }
 
   // Using x and pos into rows_ to access the entry value
