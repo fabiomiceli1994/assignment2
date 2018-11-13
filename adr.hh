@@ -30,10 +30,7 @@ public:
   double getu0 () const; //returns the boundary value at 0
   double getuL () const; //returns the boundary value at L
   SparseMatrix MatrixBuild (); //builds the matrix for the complete ADR equation
-  SparseMatrix LaplacianMatrixBuild (); //builds the matrix for the Laplacian
-  SparseMatrix GradientMatrixBuild (); //builds the matrix for the gradient
-  std::vector<double> Ad_sol (); //returns the solution for advection diffusion each point of the grid
-  std::vector<double> Dr_sol (); //returns the solution for diffusion reaction each point of the grid
+
 
 private:
   unsigned int J_; //number of points in the interior of the set. Boundary are excluded
@@ -45,5 +42,9 @@ private:
   double uL_; //boundary condition at L
 };
 
+std::vector<double> Ad_sol (unsigned int J, double const alpha, double const beta, double const gamma, double const L); //returns the solution for advection diffusion each point of the grid
+std::vector<double> Dr_sol (unsigned int J, double const alpha, double const beta, double const gamma, double const L); //returns the solution for diffusion reaction each point of the grid
+std::vector<double> Solver ( unsigned int const J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter); //solves the ADR equation
+void ErrorAnalysis (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName ); //error
 
 #endif

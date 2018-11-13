@@ -18,19 +18,14 @@ int main()
 {
   auto start = std::chrono::high_resolution_clock::now();
 
-  Adr a = Adr (10, 1., 1., 1., 1., 1., 1.);
-
-  std::cout << "J=" << a.getJ() << std::endl;
-  std::cout << "alpha=" << a.getAlpha() << std::endl;
-  std::cout << "beta=" << a.getBeta() << std::endl;
-  std::cout << "gamma=" << a.getGamma() << std::endl;
-  std::cout << "L=" << a.getL() << std::endl;
-  std::cout << "U0=" << a.getAlpha() << std::endl;
-  std::cout << "UL=" << a.getBeta() << std::endl;
-
+  Adr a = Adr (10, 1., 1., 0., 1., 0., 1.);
   SparseMatrix A = a.MatrixBuild();
+  std::vector<unsigned int> Jvec = {10, 50, 100};
 
-  A.printMatrix();
+
+  //A.printMatrix();
+
+  ErrorAnalysis (Jvec, 1., 1., 0., 1., 0., 1., 1e-6, 10000, 1e9, "Error.dat");
 
 
 
