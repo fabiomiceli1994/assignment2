@@ -1,27 +1,26 @@
 # generated files
 #TEX=1894945_ass1.tex
-#PLOTSCRIPTS=plotscript_delta.gpl plotscript_lambda.gpl
-RESULTS1=Test.txt
+PLOTSCRIPTS=plotscript1.gpl 
+RESULTS1=Errors_P_numb_0.000500.txt Errors_P_numb_1.000000.txt Errors_P_numb_10.500000.txt
 RESULTS=$(wildcard *.txt)
 PROGRAM=adr
 OBJS=main.o adr.o sparsematrix.o
-#PLOTS=Gauss_Seidel_delta.pdf Gauss_Seidel_lambda.pdf
+PLOTS=AD.pdf
 #REPORT=1894945_ass1.pdf
 # additional variables
 CPPFLAGS=-std=c++11
 #CPPFLAGS=-std=c++11 -g
 
 
-all: $(RESULTS1)
+all: $(PLOTS)
 
 #$(REPORT): $(PLOTS) $(TEX)
 	#pdflatex -interaction=batchmode 1894945_ass1.tex
 	#pdflatex -interaction=batchmode 1894945_ass1.tex
 
 
-#$(PLOTS): $(RESULTS) $(PLOTSCRIPTS)
-	#gnuplot plotscript_delta.gpl
-	#gnuplot plotscript_lambda.gpl
+$(PLOTS): $(RESULTS1) $(PLOTSCRIPTS)
+	gnuplot plotscript1.gpl
 
 
 $(RESULTS1): $(PROGRAM)

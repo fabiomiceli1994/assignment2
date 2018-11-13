@@ -1,0 +1,24 @@
+#!/bin/bash
+reset
+set terminal pdf
+set output 'AD.pdf'
+set xlabel "J"
+set ylabel "Error"
+set xrange [0:550]
+set logscale y
+set style line 1 \
+    linecolor rgb '#ff0000' \
+    linetype 0 linewidth 1 \
+    pointtype 11 pointsize 0.8
+set style line 2 \
+    linecolor rgb '#0025ad' \
+    linetype 0 linewidth 1 \
+    pointtype 7 pointsize 0.6
+set style line 3 \
+    linecolor rgb '#09ad00' \
+    linetype 0 linewidth 1 \
+    pointtype 5 pointsize 0.6
+plot 'Errors_P_numb_0.000500.txt' using 1:2 with lp ls 1 title "{P_e}=0.0005", \
+     'Errors_P_numb_1.000000.txt' using 1:2 with lp ls 2 title "{P_e}=1.0000", \
+     'Errors_P_numb_10.500000.txt' using 1:2 with lp ls 3 title "{P_e}=10.5000"
+quit

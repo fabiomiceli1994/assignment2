@@ -20,7 +20,7 @@ int main()
 
   Adr a = Adr (10, 1., 1., 0., 1., 0., 1.);
   SparseMatrix A = a.MatrixBuild();
-  std::vector<unsigned int> Jvec = {10, 50, 100, 500};
+  std::vector<unsigned int> Jvec = {10, 50, 100, 200, 300, 400, 500};
   std::vector<double> alpha = {1000, 0.25, 1.};
   std::vector<double> beta = {1., 0.5, 21};
   double gamma = 0;
