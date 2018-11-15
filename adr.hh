@@ -42,9 +42,8 @@ private:
   double uL_; //boundary condition at L
 };
 
-std::vector<double> Ad_sol (unsigned int J, double const alpha, double const beta, double const gamma, double const L); //returns the solution for advection diffusion each point of the grid
-std::vector<double> Dr_sol (unsigned int J, double const alpha, double const beta, double const gamma, double const L); //returns the solution for diffusion reaction each point of the grid
+std::vector<double> An_sol (unsigned int J, double const alpha, double const beta, double const gamma, double const L); //returns the analitical solution of the equation on the grid
 std::vector<double> Solver ( unsigned int const J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter); //solves the ADR equation
-void ErrorAnalysis (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName ); //error
+void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName ); //error
 
 #endif

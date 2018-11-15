@@ -70,7 +70,7 @@
 \maketitle % Insert the title, author and date
 
 \begin{center}
-C1 - Assignment 1 Report \hfill
+C1 - Assignment 2 Report \hfill
 Student Number: 1894945
 \vspace{3pt} \hrule \vspace{3pt} \hrule
 \end{center}
@@ -220,15 +220,23 @@ The practical meaning of the previous definitions is as follows: Taylor’s theo
 It is worth noticing that the calculation just presented also shows that the order of convergence is at least equal to the order of consistency.\\
 
 \subsection{The present case}
-In the present assignment, special cases of an 1D linear advection-diffusion-reaction problem are studied. The problem can be formulated as follows. Given $f\in C([0, L])$, find $u\in C^2(0, L)$ such that:
+\label{subsec:the-present-case}
+In the present assignment, special cases of an 1D linear advection-diffusion-reaction problem are studied. Such equations describe the advection, diffusion and reaction (sometimes the term absorption is used) of a given quantity represented by $u(x)$: typical example can be picked from hydrodynamics and from physics in general.\\
+The problem can be formulated as follows. Given $f\in C([0, L])$, find $u\in C^2(0, L)$ such that:
 
-$$-u''(x)+ pu'(x)+qu(x)= f,\hspace{5mm}u(0)=a, u(L)=b$$
+\begin{equation}
+	\label{eqn:ass-prob}
+	-u''(x)+ pu'(x)+qu(x)= f,\hspace{5mm}u(0)=a, u(L)=b
+\end{equation}
 
-for $a, b, p, q\in\mathbb{R}$. In particular, in the present case, $f=0$,  $p=\frac{\beta}{\alpha}$, $q=\frac{\gamma}{\alpha}$ (for $\alpha, \beta, \gamma\in\mathbb{R}$), $L=1$, $a=0$ and $b=1$.\\
+for $a, b, p, q\in\mathbb{R}$. \\
 
 Just as the general method previously introduced, the problem can be represented in the matrix form:
 
-$$A\mathbf{u}=\mathbf{f}$$
+\begin{align}
+	\label{eqn:matrix-form}
+	A\mathbf{u}=\mathbf{f}
+\end{align}
 
 where $\mathbf{u}=(u_1, \cdots, u_J)^{T}$, $\mathbf{f}=(f(x_1),\cdots , f(x_J))^{T}$. In this context, the entries of $A$ are given by:
 
@@ -242,20 +250,60 @@ where $\mathbf{u}=(u_1, \cdots, u_J)^{T}$, $\mathbf{f}=(f(x_1),\cdots , f(x_J))^
 	\end{cases}
 \end{align}
 	
-In this way, differential equations can be solved through the methods used in numerical linear algebra, as the \emph{Gauss-Seidel} method.\\
+In this way, differential equations can be solved through the methods used in numerical linear algebra.\\
 
-\section{Implementation}
-The program is built on the class ADR , which stands for Advection-Diffusion-Reaction. The class has 7 private variables: $J$, $\alpha$, $\beta$, $\gamma$, $L$, $u_0$ and $u_L=1$, that represent respectively the number of points in the interior of $[0,L]$, the parameters associated to the equation at hand, the length of the interval and the boundary condition at $0$ and $L$.\\
-Such a construction allows for the implementation of a general 1D ADR problem, since the private variables contained in the class fully characterise the aforementioned problem.\\
-The matrix associated to the method is built by a ... \\
-\\ 
+In what follows, it will be assumed that $f=0$,  $p=\frac{\beta}{\alpha}$, $q=\frac{\gamma}{\alpha}$ (for $\alpha, \beta, \gamma\in\mathbb{R}$), $u(0)=0$ and $u(L)=1$.
 
+\subsubsection{The advection-diffusion problem}
+If $\gamma$ is set to $0$ in \eqref{eqn:ass-prob}, a simpler problem, composed of only the advection and diffusion terms, is obtained. The solution to such a problem, for $u(0)=0$ and $u(L)=1$ is easily obtained by means of standard techniques for second order ordinary differential equations and reads:
 
-The program has been built with the aim to minimise the memory used to store the matrices. Hence, following the instructions given in the assignment, the STL container \emph{vector} has been used to store both the matrix entries and the corresponding column indexes. However, instead of using simple vectors, vectors of pointers have been used. Such a solution provides a more efficient storing of both entries and indexes, as it can be directly seen by comparing the memory allocated by the program with the case in which simple vectors are used.\\
-The initialisation of an instance SparseMatrix is implemented in the following way: the constructor builds two vectors of vectors of pointers, setting the length of the first containers to the size of the matrix, but not initialising the content of the nested containers and setting the size of the rows and columns of the matrix. When a value and an index need to be stored, the \emph{addEntry} function is called and if the row at which the value has to be inserted is non-existing, it is dynamically created: both the value and the index are pushed in. If the row exists already, a simple push$\_$back is performed.\\ 
+\begin{align}
+	\label{eqn:AD-sol}
+	u(x)=\frac{1-e^{\frac{\beta}{\alpha}x}}{1-e^{\frac{\beta}{\alpha}L}},\hspace{5mm} 0\le x\le L
+\end{align}
 
+It is clear that the solution can be rewritten as a parametric function of the global P\`{e}clet number $\mathbb{P}_e=\frac{|\beta|L}{2\alpha}$, measures the dominance of the advective term over the diffusive one. Setting $L=1$ as required by the assignment instructions and assuming $\beta>0$ for simplicity, one has:
 
-\subsection{Construction of the Gauss-Seidel function}
+$$	u(x)=\frac{1-e^{2\mathbb{P}_ex}}{1-e^{2\mathbb{P}_e}}, \hspace{5mm} 0\le x\le 1 $$
+
+In order to have a more clear interpretation of the results presented in the following sections, it is worth studying the limit of both large and small global P\`{e}clet number.\\
+If $\frac{\beta}{\alpha}<<1$, a simple Taylor expansion up to first order of \eqref{eqn:AD-sol} yields:
+
+\begin{equation}
+	\label{key:AD-smallP}
+	u(x)\approx\frac{\frac{\beta}{\alpha}x}{\frac{\beta}{\alpha}}=x
+\end{equation}
+
+The dominance of $\alpha$ with respect to $\beta$ makes the solution closer to the one of the problem $\alpha u''(x)=0$ with the same boundary conditions (BC). On the other hand, for $\frac{\beta}{\alpha}>>1$ one has:
+
+\begin{equation}
+\label{key:AD-bigP}
+u(x)\approx\frac{\frac{\beta}{\alpha}x}{\frac{\beta}{\alpha}}=e^{\frac{\beta}{\alpha}(x-1)}=e^{-\frac{\beta}{\alpha}(1-x)}
+\end{equation}
+
+Since the exponent is big and negative the solution is almost equal to zero everywhere unless a small neighbourhood of the point $x=1$ where the term $ 1-x $ becomes very small and the solution joins the value $1$ with an exponential behaviour. The width of the neighbourhood is of the order of $\frac{\alpha}{\beta}$ and thus it is quite small: in such an event, we say that the solution exhibits a boundary layer of width $\mathcal{O}\left(\frac{\alpha}{\beta}\right)$ at $x=1$ (see Ref.\cite{numerical-math}).
+
+\subsubsection{The diffusion-reaction problem}
+On the other hand, if $\beta$ is set to zero, the solution to the corresponding problem (for the same BC) is given by:
+
+\begin{equation}
+	\label{eqn:DR-sol}
+	u(x)=\frac{\sinh(\frac{\gamma}{\alpha}x)}{\sinh(\frac{\gamma}{\alpha}L)},\hspace{5mm} 0\le x\le L
+\end{equation}
+
+In this case, the relevant parameter to study the dominance of the advection with respect to the response terms, is represented by $D_a=\frac{\gamma}{\alpha}$ and is called Damk\"{o}hler number.\\
+
+\section{The program}
+\subsection{Implementation}
+\subsubsection{The class ADR}
+The program is built on the class ADR , which stands for Advection-Diffusion-Reaction. The class has 7 private variables: $J$, $\alpha$, $\beta$, $\gamma$, $L$, $u_0$ and $u_L$, that represent the number of points in the interior of $[0,L]$, the parameters associated to the equation at hand, the length of the interval and the boundary condition at $0$ and $L$, respectively. In this way, once the constructor is called, all the variables and parameters defining problem \eqref{eqn:ass-prob} are set.\\
+\subsubsection{The equation solver}
+As pointed out in $\S$(\ref{subsec:the-present-case}), BVPs can be solved through numerical methods for linear algebra, if one manages to represent the problem in a convenient matrix form. An appropriate member function has been implemented for this task: \emph{MatrixBuild} constructs matrix $A$ of Eqn.\eqref{eqn:matrix-form} with the entries given by \eqref{eqn:matrix}.\\
+Such a construction takes places within the function \emph{ADR$\_$Test}, that performs the tests required by the assignment instructions and outputs the results on different .txt files. For clarity reasons and in order to make the program more ``user-friendly",  each time a simulation is performed, a suitable success-message, containing the different parameters of the respective simulation, is printed runtime on the terminal.\\ 
+Finally, the analitical solutions at each point of $\Omega_h$ are obtained by means of the function \emph{An$\_$sol}, which simply compute Eqn.\eqref{eqn:AD-sol} or Eqn.\eqref{eqn:DR-sol} at the given set of points.\\
+The comparison between the discretised solutions and the analytical ones is made within the function \emph{ADR$\_$Test} 
+
+\subsection{Solving the equation}
 The core of the whole program is clearly represented by the function performing the Gauss-Seidel algorithm. Such a function has been chosen to be a member function and has been built to accept 7 parameters: the initial guess $x_0$, the vector to invert against $b$, the tolerance required by the method (\emph{tol}), the number of iterations after which a check for stagnation has to be made (\emph{itCheck}), two files on which the residual error at every iteration and the solution are printed respectively, the maximum number of iteration the user is willing to wait for the algorithm to converge (\emph{MaxIter}).\\
 Looking at Eqn. \eqref{eqn:Gauss-Seidel}, it is clear that the elements of $x_0$ can be overwritten as they are computed in the algorithm and only one storage vector is needed: $x_0$ has then been passed by reference to the function, so that no copy of it has to be produced.\\
 It is worth pointing out that the matrix entries needed for overwriting the elements of $x_0$ are obtained through the member function $getValue$.\footnote{More comments on this choice can be found in $\S\ref{subsec:perf}$}.\\  

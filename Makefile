@@ -1,11 +1,11 @@
 # generated files
 #TEX=1894945_ass1.tex
-PLOTSCRIPTS=plotscript1.gpl 
+PLOTSCRIPTS=plotscript1.gpl
 RESULTS1=Errors_P_numb_0.000500.txt Errors_P_numb_1.000000.txt Errors_P_numb_10.500000.txt
 RESULTS=$(wildcard *.txt)
 PROGRAM=adr
 OBJS=main.o adr.o sparsematrix.o
-PLOTS=AD.pdf
+PLOTS=ADR.pdf
 #REPORT=1894945_ass1.pdf
 # additional variables
 CPPFLAGS=-std=c++11

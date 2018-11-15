@@ -1,8 +1,8 @@
 #!/bin/bash
 reset
 set terminal pdf
-set output 'AD.pdf'
-set xlabel "J"
+set output 'ADR.pdf'
+set xlabel "h"
 set ylabel "Error"
 #set xrange [0:550]
 set logscale xy

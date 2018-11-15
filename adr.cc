@@ -133,28 +133,30 @@ SparseMatrix Adr::MatrixBuild ()
   return A;
 }
 
-//returns the solution of the equation for the advection diffusion type
-std::vector<double> Ad_sol ( unsigned int J, double const alpha, double const beta, double const gamma, double const L )
+//returns the analitical solution of the equation on the grid
+std::vector<double> An_sol ( unsigned int J, double const alpha, double const beta, double const gamma, double const L )
 {
   std::vector<double> sol ( J );
-  double c = beta/alpha; //exponent
-  double h = L/(J+1); //mesh size
-  for(unsigned int i=0; i<J; ++i)
+  if(alpha!=0 && gamma==0)
   {
-    sol[i] = (1.-exp(c*h*(i+1)))/(1.-exp(c*L));
-  }
-  return sol;
-}
-
-//returns the solution of the equation for the diffusion reaction type
-std::vector<double> Dr_sol ( unsigned int J, double const alpha, double const beta, double const gamma, double const L )
-{
-  std::vector<double> sol ( J );
-  double c = sqrt(gamma/alpha); //exponent
-  double h = L/(J+1); //mesh size
-  for(unsigned int i=0; i<J; ++i)
+    double c = beta/alpha; //exponent
+    double h = L/(J+1); //mesh size
+    for(unsigned int i=0; i<J; ++i)
+    {
+      sol[i] = (1.-exp(c*h*(i+1)))/(1.-exp(c*L));
+    }
+  }else if(alpha!=0 && beta==0)
   {
-    sol[i] = (sinh(c*h*(i+1)))/(sinh(c*L));
+    double c = sqrt(gamma/alpha); //exponent
+    double h = L/(J+1); //mesh size
+    for(unsigned int i=0; i<J; ++i)
+    {
+      sol[i] = (sinh(c*h*(i+1)))/(sinh(c*L));
+    }
+  }else
+  {
+    std::cout << "Error. The values of alpha, beta and gamma provided neither define an advection-diffusion nor a diffusion reaction one." << std::endl;
+    exit(EXIT_FAILURE);
   }
   return sol;
 }
@@ -172,20 +174,43 @@ std::vector<double> Solver ( unsigned int const J, double const alpha, double co
   std::vector<double> u_x(J); //vector containing the solution
   double P_number = ( fabs(beta)*L )/(2*alpha); //peclet number
 
-  std::string Filename = "P_numb_" + std::to_string (P_number) + "_h_" + std::to_string (h) + "_J_" + std::to_string (J) + "_GSResidual_";
-  std::string Filename2 = "P_numb_" + std::to_string (P_number) + "_h_" + std::to_string (h) + "_J_" + std::to_string (J) + "_GSsolution_";
+  if(alpha!=0 && gamma==0)
+  {
+    std::string Filename = "P_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Residual_";
+    std::string Filename2 = "P_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Solution_";
+    A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, Filename2, MaxIter);
+  }else if(alpha!=0 && beta==0)
+  {
+    std::string Filename = "D_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Residual_";
+    std::string Filename2 = "D_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Solution_";
+    A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, Filename2, MaxIter);
+  }else
+  {
+    std::cout << "Error. The values of alpha, beta and gamma provided neither define an advection-diffusion nor a diffusion reaction one." << std::endl;
+    exit(EXIT_FAILURE);
+  }
 
-  A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, Filename2, MaxIter);
-  //A.printMatrix();
+
 
   return u_x;
 }
 
 //priting the error on a file
-void ErrorAnalysis (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName )
+void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName )
 {
-  double P_number = ( fabs(beta)*L )/(2*alpha); //peclet number
-  std::ofstream myOutFile (ErrorFileName + "_P_numb_" + std::to_string(P_number) +".txt");
+
+  double P_number = ( fabs(beta)*L )/(2*alpha); //P number
+  double D_number = (gamma/alpha); //D number
+  std::string FileVarName;
+  if(alpha!=0 && gamma==0)
+  {
+    FileVarName = "_P_numb_" + std::to_string(P_number) + ".txt";
+  }else if (alpha!=0 && beta==0)
+  {
+    FileVarName = "_D_numb_" + std::to_string(D_number) + ".txt";
+  }
+
+  std::ofstream myOutFile (ErrorFileName + FileVarName );
   if ( !myOutFile.good() )
   {
     std::cout << "Failed to open the file." <<std::endl;
@@ -203,14 +228,14 @@ void ErrorAnalysis (std::vector<unsigned int>& Jvec, double const alpha, double 
   {
     double h = L/(j+1);
     double scaling = 12/(h*h)*(fabs(1.-exp(beta*L/alpha)))/(exp(beta*j*h/alpha))*(alpha/beta)*(alpha/beta)*(alpha/beta)*(alpha/beta);
-    double error = LinfNorm( vectorSub( Solver(j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter), Ad_sol(j, alpha, beta, gamma, L) ));
+    double error = LinfNorm( vectorSub( Solver(j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter), An_sol(j, alpha, beta, gamma, L) ));
     myOutFile.width(25);
     myOutFile << std::left << j;
     myOutFile.width(25);
-    //myOutFile << std::left << LinfNorm( vectorSub( Solver(j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter), Ad_sol(j, alpha, beta, gamma, L) )) << std::endl;
     myOutFile << std::left << error ;
     myOutFile.width(25);
     myOutFile << std::left << error*scaling << std::endl;
+    std::cout << "Simulation for j=" << j << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << " performed." << std::endl;
   }
 
   myOutFile.close();

@@ -4,15 +4,20 @@
 \contentsline {subsection}{\numberline {1.2}Finite difference methods}{2}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Consistency, convergence and stability of FD methods}{3}{subsection.1.3}
 \contentsline {subsection}{\numberline {1.4}The present case}{4}{subsection.1.4}
-\contentsline {section}{\numberline {2}Implementation}{5}{section.2}
-\contentsline {subsection}{\numberline {2.1}Construction of the Gauss-Seidel function}{5}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Testing correctness}{6}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Running the program}{6}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Results of the tests}{7}{subsection.2.4}
-\contentsline {subsubsection}{\numberline {2.4.1}Varying the matrix size}{7}{subsubsection.2.4.1}
-\contentsline {subsubsection}{\numberline {2.4.2}Varying $\delta $}{7}{subsubsection.2.4.2}
-\contentsline {subsubsection}{\numberline {2.4.3}Varying $\lambda $}{8}{subsubsection.2.4.3}
-\contentsline {section}{\numberline {3}Conclusive remarks}{8}{section.3}
-\contentsline {subsection}{\numberline {3.1}Memory}{8}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Performances}{9}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Possible solutions}{9}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {1.4.1}The advection-diffusion problem}{5}{subsubsection.1.4.1}
+\contentsline {subsubsection}{\numberline {1.4.2}The diffusion-reaction problem}{6}{subsubsection.1.4.2}
+\contentsline {section}{\numberline {2}The program}{6}{section.2}
+\contentsline {subsection}{\numberline {2.1}Implementation}{6}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}The class ADR}{6}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}The equation solver}{6}{subsubsection.2.1.2}
+\contentsline {subsection}{\numberline {2.2}Solving the equation}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Testing correctness}{7}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Running the program}{7}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Results of the tests}{8}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}Varying the matrix size}{8}{subsubsection.2.5.1}
+\contentsline {subsubsection}{\numberline {2.5.2}Varying $\delta $}{8}{subsubsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.3}Varying $\lambda $}{9}{subsubsection.2.5.3}
+\contentsline {section}{\numberline {3}Conclusive remarks}{9}{section.3}
+\contentsline {subsection}{\numberline {3.1}Memory}{9}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Performances}{10}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Possible solutions}{10}{subsubsection.3.2.1}
