@@ -150,7 +150,7 @@ std::vector<double> Ad_sol ( unsigned int J, double const alpha, double const be
 std::vector<double> Dr_sol ( unsigned int J, double const alpha, double const beta, double const gamma, double const L )
 {
   std::vector<double> sol ( J );
-  double c = gamma/alpha; //exponent
+  double c = sqrt(gamma/alpha); //exponent
   double h = L/(J+1); //mesh size
   for(unsigned int i=0; i<J; ++i)
   {
@@ -195,14 +195,22 @@ void ErrorAnalysis (std::vector<unsigned int>& Jvec, double const alpha, double 
   myOutFile.width(25);
   myOutFile << std::left << "# 1-Number of points" ;
   myOutFile.width(25);
-  myOutFile << std::left << "2-Error (LinfNorm)" << std::endl;
+  myOutFile << std::left << "2-Error (LinfNorm)" ;
+  myOutFile.width(25);
+  myOutFile << std::left << "3-Scaling order of covergence" << std::endl;
 
   for(int j: Jvec)
   {
+    double h = L/(j+1);
+    double scaling = 12/(h*h)*(fabs(1.-exp(beta*L/alpha)))/(exp(beta*j*h/alpha))*(alpha/beta)*(alpha/beta)*(alpha/beta)*(alpha/beta);
+    double error = LinfNorm( vectorSub( Solver(j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter), Ad_sol(j, alpha, beta, gamma, L) ));
     myOutFile.width(25);
     myOutFile << std::left << j;
     myOutFile.width(25);
-    myOutFile << std::left << LinfNorm( vectorSub( Solver(j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter), Ad_sol(j, alpha, beta, gamma, L) )) << std::endl;
+    //myOutFile << std::left << LinfNorm( vectorSub( Solver(j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter), Ad_sol(j, alpha, beta, gamma, L) )) << std::endl;
+    myOutFile << std::left << error ;
+    myOutFile.width(25);
+    myOutFile << std::left << error*scaling << std::endl;
   }
 
   myOutFile.close();
