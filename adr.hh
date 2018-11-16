@@ -31,7 +31,7 @@ public:
   double getuL () const; //returns the boundary value at L
   SparseMatrix MatrixBuild (); //builds the matrix for the complete ADR equation
 
-//igt
+//git prova
 private:
   unsigned int J_; //number of points in the interior of the set. Boundary are excluded
   double alpha_; //diffusion parameter
