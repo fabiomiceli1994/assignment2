@@ -1,0 +1,12 @@
+#Solution of linear sistem Ax = b through Gauss-Seidel algorithm.
+# 1-solution             
+0.0908678                
+0.181744                 
+0.272628                 
+0.363521                 
+0.454421                 
+0.545331                 
+0.636248                 
+0.727174                 
+0.818107                 
+0.90905                  

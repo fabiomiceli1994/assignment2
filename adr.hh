@@ -43,7 +43,7 @@ private:
 };
 
 std::vector<double> An_sol (unsigned int J, double const alpha, double const beta, double const gamma, double const L); //returns the analitical solution of the equation on the grid
-std::vector<double> Solver ( unsigned int const J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter); //solves the ADR equation
+void Solver ( std::vector<double>& u_x, unsigned int const J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter); //solves the ADR equation
 void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName ); //error
 
 #endif

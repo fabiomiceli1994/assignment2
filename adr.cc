@@ -137,7 +137,7 @@ SparseMatrix Adr::MatrixBuild ()
 std::vector<double> An_sol ( unsigned int J, double const alpha, double const beta, double const gamma, double const L )
 {
   std::vector<double> sol ( J );
-  if(alpha!=0 && gamma==0)
+  if(alpha!=0 && gamma==0) //checking non degeneracy and type of equation selected
   {
     double c = beta/alpha; //exponent
     double h = L/(J+1); //mesh size
@@ -145,7 +145,7 @@ std::vector<double> An_sol ( unsigned int J, double const alpha, double const be
     {
       sol[i] = (1.-exp(c*h*(i+1)))/(1.-exp(c*L));
     }
-  }else if(alpha!=0 && beta==0)
+  }else if(alpha!=0 && beta==0) //checking non degeneracy and type of equation selected
   {
     double c = sqrt(gamma/alpha); //exponent
     double h = L/(J+1); //mesh size
@@ -163,46 +163,56 @@ std::vector<double> An_sol ( unsigned int J, double const alpha, double const be
 
 
 //solving the ADR equation
-std::vector<double> Solver ( unsigned int const J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter)
+void Solver ( std::vector<double>& u_x, unsigned int const J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter)
 {
+  if( u_x.size() != J ) //checks consistency
+  {
+    std::cout << "Error. Size of vector solution and number of points J do not match." << std::endl;
+    exit(EXIT_FAILURE);
+  }
   Adr eq = Adr(J, alpha, beta, gamma, L, u0, uL);
   double h=L/(J+1); //mesh size
+  double P_number = ( fabs(beta)*L )/(2*alpha); //P number
+  double D_number = (gamma/alpha); //D number
+
   SparseMatrix A = eq.MatrixBuild(); //building the matrix to invert
   std::vector<double> b(J); //vector to invert against
   b[0]=u0*( ( alpha/(h*h) ) + ( beta/(2*h) ) ); //first boundary condition
   b[J-1]=uL*( ( alpha/(h*h) ) - ( beta/(2*h) ) ); //second boundary condition
-  std::vector<double> u_x(J); //vector containing the solution
-  double P_number = ( fabs(beta)*L )/(2*alpha); //peclet number
 
-  if(alpha!=0 && gamma==0)
+
+  if(alpha!=0 && gamma==0) //checking non degeneracy and which type of equation has been chosen
   {
-    std::string Filename = "P_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Residual_";
-    std::string Filename2 = "P_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Solution_";
-    A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, Filename2, MaxIter);
-  }else if(alpha!=0 && beta==0)
+
+    std::string Filename = "P_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Residual_"; //file for residual analysis
+    std::string Filename2 = "P_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Solution_"; //file for solution printing
+    A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, Filename2, MaxIter); //solving
+    //outputting the parameters on the terminal every time a simulation is concluded
+    std::cout << "Simulation for j=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Pe=" << P_number << ", performed." << std::endl;
+
+  }else if(alpha!=0 && beta==0)//checking non degeneracy and which type of equation has been chosen
+
   {
-    std::string Filename = "D_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Residual_";
-    std::string Filename2 = "D_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Solution_";
+    std::string Filename = "D_numb_" + std::to_string (D_number) + "_J_" + std::to_string (J) + "_Residual_";
+    std::string Filename2 = "D_numb_" + std::to_string (D_number) + "_J_" + std::to_string (J) + "_Solution_";
     A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, Filename2, MaxIter);
-  }else
+    std::cout << "Simulation for j=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Da=" << D_number << ", performed." << std::endl;
+
+  }else //if the values inserted do not define AD or DR equation, exit
   {
     std::cout << "Error. The values of alpha, beta and gamma provided neither define an advection-diffusion nor a diffusion reaction one." << std::endl;
     exit(EXIT_FAILURE);
   }
-
-
-
-  return u_x;
 }
 
-//priting the error on a file
+//comparing with analytical solution
 void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName )
 {
 
   double P_number = ( fabs(beta)*L )/(2*alpha); //P number
   double D_number = (gamma/alpha); //D number
   std::string FileVarName;
-  if(alpha!=0 && gamma==0)
+  if(alpha!=0 && gamma==0) //calling the outfile differently wrt which of equations has been chosen
   {
     FileVarName = "_P_numb_" + std::to_string(P_number) + ".txt";
   }else if (alpha!=0 && beta==0)
@@ -210,12 +220,12 @@ void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const
     FileVarName = "_D_numb_" + std::to_string(D_number) + ".txt";
   }
 
-  std::ofstream myOutFile (ErrorFileName + FileVarName );
+  std::ofstream myOutFile (ErrorFileName + FileVarName ); //opening the file
   if ( !myOutFile.good() )
   {
     std::cout << "Failed to open the file." <<std::endl;
   }
-
+  //making the file human readable
   myOutFile << "#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << "." <<std::endl;
   myOutFile.width(25);
   myOutFile << std::left << "# 1-Number of points" ;
@@ -224,18 +234,19 @@ void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const
   myOutFile.width(25);
   myOutFile << std::left << "3-Scaling order of covergence" << std::endl;
 
-  for(int j: Jvec)
+  for(int j: Jvec) //lopping over the chosen values of j
   {
     double h = L/(j+1);
+    std::vector<double> u_x(j);
+    Solver(u_x, j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter);
     double scaling = 12/(h*h)*(fabs(1.-exp(beta*L/alpha)))/(exp(beta*j*h/alpha))*(alpha/beta)*(alpha/beta)*(alpha/beta)*(alpha/beta);
-    double error = LinfNorm( vectorSub( Solver(j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter), An_sol(j, alpha, beta, gamma, L) ));
+    double error = LinfNorm( vectorSub( u_x, An_sol(j, alpha, beta, gamma, L) ) ); //Linf is defined in SparseMatrix
     myOutFile.width(25);
     myOutFile << std::left << j;
     myOutFile.width(25);
-    myOutFile << std::left << error ;
+    myOutFile << std::left << error;
     myOutFile.width(25);
     myOutFile << std::left << error*scaling << std::endl;
-    std::cout << "Simulation for j=" << j << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << " performed." << std::endl;
   }
 
   myOutFile.close();

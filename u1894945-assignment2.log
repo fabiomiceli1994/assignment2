@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.10.23)  15 NOV 2018 19:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.10.23)  16 NOV 2018 09:10
 entering extended mode
 **./u1894945-assignment2.tex
 (u1894945-assignment2.tex
@@ -1239,11 +1239,11 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 439.
  ) 
 Here is how much of TeX's memory you used:
- 9989 strings out of 492971
- 148475 string characters out of 3135072
+ 9991 strings out of 492971
+ 148493 string characters out of 3135072
  294768 words of memory out of 3000000
  13509 multiletter control sequences out of 15000+200000
- 19237 words of font info for 108 fonts, out of 3000000 for 9000
+ 19231 words of font info for 109 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  31i,16n,43p,921b,468s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -1264,7 +1264,7 @@ ex-texmf/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/share/miktex-texm
 f/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/share/miktex-texmf/font
 s/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/share/miktex-texmf/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb>
-Output written on u1894945-assignment2.pdf (11 pages, 298720 bytes).
+Output written on u1894945-assignment2.pdf (11 pages, 299329 bytes).
 PDF statistics:
  313 PDF objects out of 1000 (max. 8388607)
  66 named destinations out of 1000 (max. 500000)
