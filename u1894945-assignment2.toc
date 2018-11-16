@@ -8,8 +8,6 @@
 \contentsline {subsubsection}{\numberline {1.4.2}The diffusion-reaction problem}{6}{subsubsection.1.4.2}
 \contentsline {section}{\numberline {2}The program}{6}{section.2}
 \contentsline {subsection}{\numberline {2.1}Implementation}{6}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}The class ADR}{6}{subsubsection.2.1.1}
-\contentsline {subsubsection}{\numberline {2.1.2}The equation solver}{6}{subsubsection.2.1.2}
 \contentsline {subsection}{\numberline {2.2}Solving the equation}{6}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Testing correctness}{7}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Running the program}{7}{subsection.2.4}

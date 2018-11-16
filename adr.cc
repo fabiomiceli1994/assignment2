@@ -134,7 +134,7 @@ SparseMatrix Adr::MatrixBuild ()
 }
 
 //returns the analitical solution of the equation on the grid
-std::vector<double> An_sol ( unsigned int J, double const alpha, double const beta, double const gamma, double const L )
+std::vector<double> An_sol ( unsigned int J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL )
 {
   std::vector<double> sol ( J );
   if(alpha!=0 && gamma==0) //checking non degeneracy and type of equation selected
@@ -158,6 +158,9 @@ std::vector<double> An_sol ( unsigned int J, double const alpha, double const be
     std::cout << "Error. The values of alpha, beta and gamma provided neither define an advection-diffusion nor a diffusion reaction one." << std::endl;
     exit(EXIT_FAILURE);
   }
+
+  sol.insert(sol.begin(), u0);
+  sol.push_back(uL);
   return sol;
 }
 
@@ -180,29 +183,56 @@ void Solver ( std::vector<double>& u_x, unsigned int const J, double const alpha
   b[0]=u0*( ( alpha/(h*h) ) + ( beta/(2*h) ) ); //first boundary condition
   b[J-1]=uL*( ( alpha/(h*h) ) - ( beta/(2*h) ) ); //second boundary condition
 
+  std::string Filename, Filename2;
+
 
   if(alpha!=0 && gamma==0) //checking non degeneracy and which type of equation has been chosen
   {
 
-    std::string Filename = "P_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Residual_"; //file for residual analysis
-    std::string Filename2 = "P_numb_" + std::to_string (P_number) + "_J_" + std::to_string (J) + "_Solution_"; //file for solution printing
-    A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, Filename2, MaxIter); //solving
+    Filename = "P_numb_" + std::to_string (P_number) + "_Residual_" + "J_" ;
+    Filename2 = "P_numb_" + std::to_string (P_number) + "_Solution_" + "J_" + std::to_string(J) + ".txt";
+    A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, MaxIter); //solving
     //outputting the parameters on the terminal every time a simulation is concluded
-    std::cout << "Simulation for j=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Pe=" << P_number << ", performed." << std::endl;
+    std::cout << "Solved for J=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Pe=" << P_number << ", performed." << std::endl;
 
   }else if(alpha!=0 && beta==0)//checking non degeneracy and which type of equation has been chosen
 
   {
-    std::string Filename = "D_numb_" + std::to_string (D_number) + "_J_" + std::to_string (J) + "_Residual_";
-    std::string Filename2 = "D_numb_" + std::to_string (D_number) + "_J_" + std::to_string (J) + "_Solution_";
-    A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, Filename2, MaxIter);
-    std::cout << "Simulation for j=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Da=" << D_number << ", performed." << std::endl;
-
+    Filename = "D_numb_" + std::to_string (D_number) + "_Residual_" + "J_" ;
+    Filename2 = "D_numb_" + std::to_string (D_number) + "_Solution_" + "J_" + std::to_string(J) + ".txt";
+    A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, MaxIter);
+    std::cout << "Solved for J=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Da=" << D_number << ", performed." << std::endl;
   }else //if the values inserted do not define AD or DR equation, exit
   {
     std::cout << "Error. The values of alpha, beta and gamma provided neither define an advection-diffusion nor a diffusion reaction one." << std::endl;
     exit(EXIT_FAILURE);
   }
+
+  std::ofstream myFile (Filename2); //opening the file
+  if ( !myFile.good() )
+  {
+    std::cout << "Failed to open the file." << std::endl;
+  }
+
+  myFile << "#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << "." <<std::endl;
+  myFile.width(25);
+  myFile << std::left << "#1-x_j/L" ;
+  myFile.width(25);
+  myFile << std::left << "2-Value" << std::endl;
+
+  u_x.insert(u_x.begin(), u0);
+  u_x.push_back(uL);
+
+  for(unsigned int i=0; i<u_x.size(); ++i)
+  {
+    myFile.width(25);
+    myFile << std::left << ((double)i)*L/(J+1) ;
+    myFile.width(25);
+    myFile << std::left << u_x[i] << std::endl;
+  }
+
+  myFile.close();
+
 }
 
 //comparing with analytical solution
@@ -220,7 +250,7 @@ void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const
     FileVarName = "_D_numb_" + std::to_string(D_number) + ".txt";
   }
 
-  std::ofstream myOutFile (ErrorFileName + FileVarName ); //opening the file
+  std::ofstream myOutFile (ErrorFileName + FileVarName); //opening the file
   if ( !myOutFile.good() )
   {
     std::cout << "Failed to open the file." <<std::endl;
@@ -228,19 +258,19 @@ void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const
   //making the file human readable
   myOutFile << "#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << "." <<std::endl;
   myOutFile.width(25);
-  myOutFile << std::left << "# 1-Number of points" ;
+  myOutFile << std::left << "#1-Number of points" ;
   myOutFile.width(25);
   myOutFile << std::left << "2-Error (LinfNorm)" ;
   myOutFile.width(25);
   myOutFile << std::left << "3-Scaling order of covergence" << std::endl;
 
-  for(int j: Jvec) //lopping over the chosen values of j
+  for(int j: Jvec) //looping over the chosen values of j
   {
     double h = L/(j+1);
     std::vector<double> u_x(j);
     Solver(u_x, j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter);
     double scaling = 12/(h*h)*(fabs(1.-exp(beta*L/alpha)))/(exp(beta*j*h/alpha))*(alpha/beta)*(alpha/beta)*(alpha/beta)*(alpha/beta);
-    double error = LinfNorm( vectorSub( u_x, An_sol(j, alpha, beta, gamma, L) ) ); //Linf is defined in SparseMatrix
+    double error = LinfNorm( vectorSub( u_x, An_sol(j, alpha, beta, gamma, L, u0, uL) ) ); //Linf is defined in SparseMatrix
     myOutFile.width(25);
     myOutFile << std::left << j;
     myOutFile.width(25);

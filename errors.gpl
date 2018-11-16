@@ -1,9 +1,10 @@
 #!/bin/bash
 reset
 set terminal pdf
-set output 'ADR.pdf'
+set output 'ADRer.pdf'
 set xlabel "h"
 set ylabel "Error"
+set key left top
 #set xrange [0:550]
 set logscale xy
 set style line 1 \

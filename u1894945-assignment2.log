@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.10.23)  16 NOV 2018 09:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.10.23)  16 NOV 2018 11:21
 entering extended mode
 **./u1894945-assignment2.tex
 (u1894945-assignment2.tex
@@ -1118,21 +1118,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 294--295
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 299--300
+Underfull \hbox (badness 10000) in paragraph at lines 298--302
 
  []
 
 
 LaTeX Warning: Reference `eqn:Gauss-Seidel' on page 6 undefined on input line 3
-08.
+06.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 314--318
+Underfull \hbox (badness 10000) in paragraph at lines 312--316
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--322
+Underfull \hbox (badness 10000) in paragraph at lines 318--320
 
  []
 
@@ -1142,108 +1142,108 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \hbox (badness 10000) in paragraph at lines 339--341
+Underfull \hbox (badness 10000) in paragraph at lines 337--339
 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 342.
+(hyperref)                removing `math shift' on input line 340.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\delta' on input line 342.
+(hyperref)                removing `\delta' on input line 340.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 342.
+(hyperref)                removing `math shift' on input line 340.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 348--350
+Underfull \hbox (badness 10000) in paragraph at lines 346--348
 
  []
 
 
 LaTeX Warning: Reference `subsubsec:gauss-seidel-method' on page 8 undefined on
- input line 351.
+ input line 349.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--352
+Underfull \hbox (badness 10000) in paragraph at lines 349--350
 
  []
 
 [8]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 353.
+(hyperref)                removing `math shift' on input line 351.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\lambda' on input line 353.
+(hyperref)                removing `\lambda' on input line 351.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 353.
+(hyperref)                removing `math shift' on input line 351.
 
 
 LaTeX Warning: Reference `subsubsec:splitting-methods' on page 9 undefined on i
-nput line 360.
+nput line 358.
 
 
 LaTeX Warning: Reference `subsubsec:gauss-seidel-method' on page 9 undefined on
- input line 360.
+ input line 358.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--361
+Underfull \hbox (badness 10000) in paragraph at lines 357--359
 
  []
 
 
-Overfull \hbox (53.37556pt too wide) in paragraph at lines 393--393
+Overfull \hbox (53.37556pt too wide) in paragraph at lines 391--391
 []\OT1/cmtt/m/n/10.95 ==4200==   total heap usage: 1,252,428 allocs, 1,252,428 
 frees, 989,616,540 bytes allocated[] 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 395--398
+Underfull \hbox (badness 10000) in paragraph at lines 393--396
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--412
+Underfull \hbox (badness 10000) in paragraph at lines 409--410
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 414--417
+Underfull \hbox (badness 10000) in paragraph at lines 412--415
 
  []
 
 [10]
 No file u1894945-assignment2.ind.
 (u1894945-assignment2.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 439.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 437.
  [11
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 439.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 437.
  (u1894945-assignment2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 439.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 439.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 437.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 437.
 Package rerunfilecheck Info: File `u1894945-assignment2.out' has not changed.
-(rerunfilecheck)             Checksum: AA2A1C8D97AC0251E250780A6248EB43;1545.
+(rerunfilecheck)             Checksum: 05963B4C2BBDEDB0E09866F4AD6DCF23;1393.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 439.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 437.
  ) 
 Here is how much of TeX's memory you used:
- 9991 strings out of 492971
- 148493 string characters out of 3135072
- 294768 words of memory out of 3000000
- 13509 multiletter control sequences out of 15000+200000
- 19231 words of font info for 109 fonts, out of 3000000 for 9000
+ 9989 strings out of 492971
+ 148431 string characters out of 3135072
+ 295768 words of memory out of 3000000
+ 13507 multiletter control sequences out of 15000+200000
+ 19339 words of font info for 110 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  31i,16n,43p,921b,468s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/share/miktex-texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -1264,9 +1264,9 @@ ex-texmf/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/share/miktex-texm
 f/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/share/miktex-texmf/font
 s/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/share/miktex-texmf/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb>
-Output written on u1894945-assignment2.pdf (11 pages, 299329 bytes).
+Output written on u1894945-assignment2.pdf (11 pages, 297839 bytes).
 PDF statistics:
- 313 PDF objects out of 1000 (max. 8388607)
- 66 named destinations out of 1000 (max. 500000)
- 16049 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 303 PDF objects out of 1000 (max. 8388607)
+ 64 named destinations out of 1000 (max. 500000)
+ 16033 words of extra memory for PDF output out of 17280 (max. 10000000)
 

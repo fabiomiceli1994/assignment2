@@ -1,0 +1,14 @@
+#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=1, beta=21, gamma=0.
+#1-x_j/L                 2-Value                  
+0                        0                        
+0.0909091                0                        
+0.181818                 0                        
+0.272727                 0                        
+0.363636                 0                        
+0.454545                 0                        
+0.545455                 6.06368e-09              
+0.636364                 2.90506e-07              
+0.727273                 1.25736e-05              
+0.818182                 0.000540827              
+0.909091                 0.0232558                
+1                        1                        

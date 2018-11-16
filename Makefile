@@ -1,11 +1,11 @@
 # generated files
 #TEX=1894945_ass1.tex
-PLOTSCRIPTS=plotscript1.gpl
-RESULTS1=Errors_P_numb_0.000500.txt Errors_P_numb_1.000000.txt Errors_P_numb_10.500000.txt
+PLOTSCRIPTS=errors.gpl sol1.gpl sol2.gpl sol3.gpl
 RESULTS=$(wildcard *.txt)
+RESULTS1=Errors_P_numb_0.000500.txt Errors_P_numb_1.000000.txt Errors_P_numb_10.500000.txt P_numb_0.000500_Solution_J_10.txt P_numb_0.000500_Solution_J_50.txt P_numb_0.000500_Solution_J_100.txt P_numb_0.000500_Solution_J_200.txt P_numb_0.000500_Solution_J_300.txt P_numb_0.000500_Solution_J_400.txt P_numb_0.000500_Solution_J_500.txt P_numb_1.000000_Solution_J_10.txt P_numb_1.000000_Solution_J_50.txt P_numb_1.000000_Solution_J_100.txt P_numb_1.000000_Solution_J_200.txt P_numb_1.000000_Solution_J_300.txt P_numb_1.000000_Solution_J_400.txt P_numb_1.000000_Solution_J_500.txt P_numb_10.500000_Solution_J_10.txt P_numb_10.500000_Solution_J_50.txt P_numb_10.500000_Solution_J_100.txt P_numb_10.500000_Solution_J_200.txt P_numb_10.500000_Solution_J_300.txt P_numb_10.500000_Solution_J_400.txt P_numb_10.500000_Solution_J_500.txt
 PROGRAM=adr
 OBJS=main.o adr.o sparsematrix.o
-PLOTS=ADR.pdf
+PLOTS=ADRer.pdf ADRsol1.pdf ADRsol2.pdf ADRsol3.pdf
 #REPORT=1894945_ass1.pdf
 # additional variables
 CPPFLAGS=-std=c++11
@@ -20,8 +20,10 @@ all: $(PLOTS)
 
 
 $(PLOTS): $(RESULTS1) $(PLOTSCRIPTS)
-	gnuplot plotscript1.gpl
-
+	gnuplot errors.gpl
+	gnuplot sol1.gpl
+	gnuplot sol2.gpl
+	gnuplot sol3.gpl
 
 $(RESULTS1): $(PROGRAM)
 	./$(PROGRAM)

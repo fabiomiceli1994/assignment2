@@ -28,7 +28,7 @@ public:
   void addEntry ( unsigned int rowNumb, unsigned int colNumb, double newValue); //adds an entry to the matrix in the location [rowNumb][colNumb]
   double getValue (unsigned int x, unsigned int y) const; //return the element (x, y) of the real matrix
   void printMatrix (); //prints the matrix
-  void Gauss_Seidel ( std::vector<double>& x_0, const std::vector<double>& b, const double tol, const int itCheck, std::string fileName, std::string fileName2, const int MaxIter ); //Gauss_Seidel
+  void Gauss_Seidel ( std::vector<double>& x_0, const std::vector<double>& b, const double tol, const int itCheck, std::string fileName, const int MaxIter ); //Gauss_Seidel
 
 
 private:
@@ -42,7 +42,6 @@ private:
 std::vector<double> vectorSum ( std::vector<double> v1, std::vector<double> v2 ); //sums two vectors
 std::vector<double> vectorSub ( std::vector<double> v1, std::vector<double> v2 ); //subtracts two vectors
 double LinfNorm ( std::vector<double> v ); //returns the maximum of a vector. In this case I use it to construct the LinfNorm
-void Gauss_Seidel_test( unsigned int N, double lambda, double delta, const double tol, const int itCheck, const int MaxIter); //function for testing Gauss_Seidel
 
 
 #endif

@@ -1,0 +1,25 @@
+#!/bin/bash
+reset
+set terminal pdf
+set output 'ADRsol3.pdf'
+set xlabel "j"
+set ylabel "u(x_{j})"
+set yrange [-0.05:1.1]
+set xrange [0:1.01]
+set key left top
+#set logscale y
+#set xrange [0:550].
+#set logscale xy
+set style line 1 \
+    linecolor "blue"\
+    linetype 0 linewidth 1.5 \
+    pointtype 3 pointsize 1
+
+plot 'P_numb_10.500000_Solution_J_10.txt' using 1:2 with lp ls 1 title "{P_e}=10.5000, J=10", \
+     'P_numb_10.500000_Solution_J_50.txt' using 1:2 w l title "{P_e}=10.5000, J=50", \
+     'P_numb_10.500000_Solution_J_100.txt' using 1:2 w l title "{P_e}=10.5000, J=100", \
+     'P_numb_10.500000_Solution_J_200.txt' using 1:2 w l title "{P_e}=10.5000, J=200", \
+     'P_numb_10.500000_Solution_J_300.txt' using 1:2 w l title "{P_e}=10.5000, J=300", \
+     'P_numb_10.500000_Solution_J_400.txt' using 1:2 w l title "{P_e}=10.5000, J=400", \
+     'P_numb_10.500000_Solution_J_500.txt' using 1:2 w l title "{P_e}=10.5000, J=500"
+quit
