@@ -1,9 +1,0 @@
-#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=1, beta=21, gamma=0.
-#1-Number of points      2-Error (LinfNorm)       3-Scaling order of covergence
-9                        0.146847                 0.00739923               
-19                       0.0384623                0.00271275               
-39                       0.0086967                0.00145139               
-79                       0.00212548               0.0010913                
-159                      0.000528445              0.000951798              
-319                      0.00013208               0.000891129              
-639                      3.30134e-05              0.000862193              
