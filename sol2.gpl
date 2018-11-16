@@ -5,14 +5,15 @@ set output 'ADRsol2.pdf'
 set xlabel "j"
 set ylabel "u(x_{j})"
 set key left top
+set title "Solutions for P_{e}=1.000000"
 #set logscale y
 #set xrange [0:550]
 #set logscale xy
-plot 'P_numb_1.000000_Solution_J_10.txt' using 1:2 with l title "{P_e}=1.0000, J=10", \
-     'P_numb_1.000000_Solution_J_50.txt' using 1:2 with l title "{P_e}=1.0000, J=50", \
-     'P_numb_1.000000_Solution_J_100.txt' using 1:2 with l title "{P_e}=1.0000, J=100", \
-     'P_numb_1.000000_Solution_J_200.txt' using 1:2 with l title "{P_e}=1.0000, J=200", \
-     'P_numb_1.000000_Solution_J_300.txt' using 1:2 with l title "{P_e}=1.0000, J=300", \
-     'P_numb_1.000000_Solution_J_400.txt' using 1:2 with l title "{P_e}=1.0000, J=400", \
-     'P_numb_1.000000_Solution_J_500.txt' using 1:2 with l title "{P_e}=1.0000, J=500"
+plot 'P_numb_1.000000_Solution_J_9.txt' using 1:2 w l title "h=0.1", \
+     'P_numb_1.000000_Solution_J_19.txt' using 1:2 w l title "h=0.05", \
+     'P_numb_1.000000_Solution_J_39.txt' using 1:2 w l title "h=0.025", \
+     'P_numb_1.000000_Solution_J_79.txt' using 1:2 w l title "h=0.0125", \
+     'P_numb_1.000000_Solution_J_159.txt' using 1:2 w l title "h=0.00625", \
+     'P_numb_1.000000_Solution_J_319.txt' using 1:2 w l title "h=0.003125", \
+     'P_numb_1.000000_Solution_J_639.txt' using 1:2 w l title "h=0.0015625"
 quit

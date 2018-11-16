@@ -18,7 +18,7 @@ int main()
 {
   auto start = std::chrono::high_resolution_clock::now();
 
-  std::vector<unsigned int> Jvec = {10, 50, 100, 200, 300, 400, 500}; //different values of J for testing
+  std::vector<unsigned int> Jvec = {9, 19, 39, 79, 159, 319, 639}; //different values of J for testing
   std::vector<double> alpha = {1000, 0.25, 1.}; //values of alpha for testing
   std::vector<double> beta = {1., 0.5, 21}; // values of beta for testing
   std::vector<double> gamma = {0., 0., 0.}; //gamma is fixed
