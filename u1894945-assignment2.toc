@@ -8,14 +8,15 @@
 \contentsline {subsubsection}{\numberline {1.4.2}The diffusion-reaction problem}{6}{subsubsection.1.4.2}
 \contentsline {section}{\numberline {2}The program}{6}{section.2}
 \contentsline {subsection}{\numberline {2.1}Implementation}{6}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Solving the equation}{7}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}Running the program}{7}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Testing correctness}{7}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Running the program}{8}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Results of the tests}{8}{subsection.2.5}
-\contentsline {subsubsection}{\numberline {2.5.1}Varying the matrix size}{8}{subsubsection.2.5.1}
-\contentsline {subsubsection}{\numberline {2.5.2}Varying $\delta $}{8}{subsubsection.2.5.2}
-\contentsline {subsubsection}{\numberline {2.5.3}Varying $\lambda $}{9}{subsubsection.2.5.3}
-\contentsline {section}{\numberline {3}Conclusive remarks}{9}{section.3}
-\contentsline {subsection}{\numberline {3.1}Memory}{9}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Performances}{10}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Possible solutions}{10}{subsubsection.3.2.1}
+\contentsline {subsection}{\numberline {2.4}Results of the tests}{8}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {2.4.1}Solutions to the AD equation}{8}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.2}Small P\'{e}clet numbers}{8}{subsubsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.3}P\'{e}clet number close or equal to 1}{10}{subsubsection.2.4.3}
+\contentsline {subsubsection}{\numberline {2.4.4}Large P\'{e}clet number}{11}{subsubsection.2.4.4}
+\contentsline {subsection}{\numberline {2.5}Error analysis and order of convergence}{13}{subsection.2.5}
+\contentsline {section}{\numberline {3}Conclusive remarks}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}Memory}{13}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Performances}{14}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Possible solutions}{14}{subsubsection.3.2.1}

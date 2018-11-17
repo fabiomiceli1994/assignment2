@@ -7,14 +7,15 @@
 \BOOKMARK [3][-]{subsubsection.1.4.2}{The diffusion-reaction problem}{subsection.1.4}% 7
 \BOOKMARK [1][-]{section.2}{The program}{}% 8
 \BOOKMARK [2][-]{subsection.2.1}{Implementation}{section.2}% 9
-\BOOKMARK [2][-]{subsection.2.2}{Solving the equation}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.2}{Running the program}{section.2}% 10
 \BOOKMARK [2][-]{subsection.2.3}{Testing correctness}{section.2}% 11
-\BOOKMARK [2][-]{subsection.2.4}{Running the program}{section.2}% 12
-\BOOKMARK [2][-]{subsection.2.5}{Results of the tests}{section.2}% 13
-\BOOKMARK [3][-]{subsubsection.2.5.1}{Varying the matrix size}{subsection.2.5}% 14
-\BOOKMARK [3][-]{subsubsection.2.5.2}{Varying }{subsection.2.5}% 15
-\BOOKMARK [3][-]{subsubsection.2.5.3}{Varying }{subsection.2.5}% 16
-\BOOKMARK [1][-]{section.3}{Conclusive remarks}{}% 17
-\BOOKMARK [2][-]{subsection.3.1}{Memory}{section.3}% 18
-\BOOKMARK [2][-]{subsection.3.2}{Performances}{section.3}% 19
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Possible solutions}{subsection.3.2}% 20
+\BOOKMARK [2][-]{subsection.2.4}{Results of the tests}{section.2}% 12
+\BOOKMARK [3][-]{subsubsection.2.4.1}{Solutions to the AD equation}{subsection.2.4}% 13
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Small P\351clet numbers}{subsection.2.4}% 14
+\BOOKMARK [3][-]{subsubsection.2.4.3}{P\351clet number close or equal to 1}{subsection.2.4}% 15
+\BOOKMARK [3][-]{subsubsection.2.4.4}{Large P\351clet number}{subsection.2.4}% 16
+\BOOKMARK [2][-]{subsection.2.5}{Error analysis and order of convergence}{section.2}% 17
+\BOOKMARK [1][-]{section.3}{Conclusive remarks}{}% 18
+\BOOKMARK [2][-]{subsection.3.1}{Memory}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.2}{Performances}{section.3}% 20
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Possible solutions}{subsection.3.2}% 21
