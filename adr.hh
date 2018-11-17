@@ -30,8 +30,10 @@ public:
   double getu0 () const; //returns the boundary value at 0
   double getuL () const; //returns the boundary value at L
   SparseMatrix MatrixBuild (); //builds the matrix for the complete ADR equation
+  std::vector<double> An_sol (); //returns the analitical solution of the equation on the grid
+  void Solver ( std::vector<double>& u_x, double const tol, double const itCheck, int const MaxIter); //solves the ADR equation
+  //void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName ); //error
 
-//git prova
 private:
   unsigned int J_; //number of points in the interior of the set. Boundary are excluded
   double alpha_; //diffusion parameter
@@ -42,8 +44,8 @@ private:
   double uL_; //boundary condition at L
 };
 
-std::vector<double> An_sol (unsigned int J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL); //returns the analitical solution of the equation on the grid
-void Solver ( std::vector<double>& u_x, unsigned int const J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter); //solves the ADR equation
+//std::vector<double> An_sol (unsigned int J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL); //returns the analitical solution of the equation on the grid
+//void Solver ( std::vector<double>& u_x, unsigned int const J, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter); //solves the ADR equation
 void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName ); //error
 
 #endif
