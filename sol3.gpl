@@ -13,11 +13,11 @@ set title "Solutions for P_{e} = 10.500000"
 #set logscale xy
 set style line 1 \
 linecolor rgb '#09ad00' \
-    linetype 0 linewidth 1.5 \
+    linetype 0 linewidth 1.8 \
     pointtype 7 pointsize 0.6
 set style line 2 \
     linecolor rgb '#0025ad' \
-    linetype 0 linewidth 1.5 \
+    linetype 0 linewidth 1.8 \
     pointtype 7 pointsize 0.6
 
     plot 'P_numb_10.500000_Solution_J_9.txt' using 1:2 w lp ls 1 title "h=0.1", \

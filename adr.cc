@@ -193,7 +193,7 @@ void Solver ( std::vector<double>& u_x, unsigned int const J, double const alpha
     Filename2 = "P_numb_" + std::to_string (P_number) + "_Solution_" + "J_" + std::to_string(J) + ".txt";
     A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, MaxIter); //solving
     //outputting the parameters on the terminal every time a simulation is concluded
-    std::cout << "Solved for J=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Pe=" << P_number << ", performed." << std::endl;
+    std::cout << "Solved for J=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Pe=" << P_number << "." << std::endl;
 
   }else if(alpha!=0 && beta==0)//checking non degeneracy and which type of equation has been chosen
 
@@ -201,7 +201,7 @@ void Solver ( std::vector<double>& u_x, unsigned int const J, double const alpha
     Filename = "D_numb_" + std::to_string (D_number) + "_Residual_" + "J_" ;
     Filename2 = "D_numb_" + std::to_string (D_number) + "_Solution_" + "J_" + std::to_string(J) + ".txt";
     A.Gauss_Seidel(u_x, b, tol, itCheck, Filename, MaxIter);
-    std::cout << "Solved for J=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Da=" << D_number << ", performed." << std::endl;
+    std::cout << "Solved for J=" << J << ", alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << ", Da=" << D_number << "." << std::endl;
   }else //if the values inserted do not define AD or DR equation, exit
   {
     std::cout << "Error. The values of alpha, beta and gamma provided neither define an advection-diffusion nor a diffusion reaction one." << std::endl;
@@ -241,6 +241,7 @@ void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const
 
   double P_number = ( fabs(beta)*L )/(2*alpha); //P number
   double D_number = (gamma/alpha); //D number
+  double error, err_ratio, err_old=1; // variables to compute errors ratios.Err_old is set to 1 by default since at the first iterations no ratio will be printed.
   std::string FileVarName;
   if(alpha!=0 && gamma==0) //calling the outfile differently wrt which of equations has been chosen
   {
@@ -258,25 +259,30 @@ void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const
   //making the file human readable
   myOutFile << "#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << "." <<std::endl;
   myOutFile.width(25);
-  myOutFile << std::left << "#1-Number of points" ;
+  myOutFile << std::left << "#1-Mesh size" ;
   myOutFile.width(25);
   myOutFile << std::left << "2-Error (LinfNorm)" ;
   myOutFile.width(25);
-  myOutFile << std::left << "3-Scaling order of covergence" << std::endl;
-
-  for(int j: Jvec) //looping over the chosen values of j
+  myOutFile << std::left << "3-Error Ratios" << std::endl;
+  for(unsigned int j=0; j<Jvec.size(); ++j) //looping over the different number of points chosen
   {
-    double h = L/(j+1);
-    std::vector<double> u_x(j);
-    Solver(u_x, j, alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter);
-    double scaling = 12/(h*h)*(fabs(1.-exp(beta*L/alpha)))/(exp(beta*j*h/alpha))*(alpha/beta)*(alpha/beta)*(alpha/beta)*(alpha/beta);
-    double error = LinfNorm( vectorSub( u_x, An_sol(j, alpha, beta, gamma, L, u0, uL) ) ); //Linf is defined in SparseMatrix
+    std::vector<double> u_x(Jvec[j]); //initial guess
+    Solver(u_x, Jvec[j], alpha, beta, gamma, L, u0, uL, tol, itCheck, MaxIter);
+    error = LinfNorm( vectorSub( u_x, An_sol(Jvec[j], alpha, beta, gamma, L, u0, uL) ) ); //Linf is defined in SparseMatrix
+    err_ratio = err_old/error;
+    err_old = error;
     myOutFile.width(25);
-    myOutFile << std::left << j;
+    myOutFile << std::left << 1./(Jvec[j]+1);
     myOutFile.width(25);
     myOutFile << std::left << error;
     myOutFile.width(25);
-    myOutFile << std::left << error*scaling << std::endl;
+    if( j == 0 || error == 0 ) //skips the first call since no ratio can be calculated and avoids printing "nan" if error is qual to zero
+    {
+      myOutFile << std::left << "\t" << std::endl;
+    }else
+    {
+      myOutFile << std::left << log2(err_ratio) << std::endl;
+    }
   }
 
   myOutFile.close();

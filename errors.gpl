@@ -5,7 +5,7 @@ set output 'ADRer.pdf'
 set xlabel "h"
 set ylabel "Error"
 set key left top
-#set xrange [0:550]
+set yrange [10**(-11):100]
 set logscale xy
 set style line 1 \
     linecolor rgb '#ff0000' \
@@ -23,8 +23,18 @@ set style line 4 \
     linecolor 'orange' \
     linetype 0 linewidth 1 \
     pointtype 7 pointsize 0.6
-plot 'Errors_P_numb_0.000500.txt' using (1/($1+1)):2 with lp ls 1 title "{P_e}=0.0005", \
-     'Errors_P_numb_1.000000.txt' using (1/($1+1)):2 with lp ls 2 title "{P_e}=1.0000", \
-     'Errors_P_numb_10.500000.txt' using (1/($1+1)):2 with lp ls 3 title "{P_e}=10.5000", \
-     'Errors_P_numb_10.500000.txt' u (1/($1+1)):(1/($1+1))**2 w lp ls 4 title "h^{2}"
+set style line 5 \
+    linecolor rgb '#4682b4' \
+    linetype 0 linewidth 1 \
+    pointtype 3 pointsize 0.6
+set style line 6 \
+    linecolor rgb '#6495ed' \
+    linetype 0 linewidth 1 \
+    pointtype 16 pointsize 0.6
+
+plot 'Errors_P_numb_0.000500.txt' using 1:2 with lp ls 1 title "{P_e}=0.0005", \
+     'Errors_P_numb_0.010000.txt' using 1:2 with lp ls 5 title "{P_e}=0.0100", \
+     'Errors_P_numb_1.000000.txt' using 1:2 with lp ls 2 title "{P_e}=1.0000", \
+     'Errors_P_numb_10.500000.txt' using 1:2 with lp ls 3 title "{P_e}=10.5000", \
+     'Errors_P_numb_10.500000.txt' using 1:($1)**2 with lp ls 4 title "h^{2}"
 quit

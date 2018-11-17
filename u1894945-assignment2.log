@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.10.23)  16 NOV 2018 15:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2018.10.23)  17 NOV 2018 08:50
 entering extended mode
 **./u1894945-assignment2.tex
 (u1894945-assignment2.tex
@@ -1241,7 +1241,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 437.
 Here is how much of TeX's memory you used:
  9989 strings out of 492971
  148431 string characters out of 3135072
- 295768 words of memory out of 3000000
+ 294768 words of memory out of 3000000
  13507 multiletter control sequences out of 15000+200000
  19396 words of font info for 110 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1264,7 +1264,7 @@ ex-texmf/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/share/miktex-texm
 f/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/share/miktex-texmf/font
 s/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/share/miktex-texmf/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb>
-Output written on u1894945-assignment2.pdf (11 pages, 297840 bytes).
+Output written on u1894945-assignment2.pdf (11 pages, 297804 bytes).
 PDF statistics:
  303 PDF objects out of 1000 (max. 8388607)
  64 named destinations out of 1000 (max. 500000)
