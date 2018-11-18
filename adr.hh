@@ -32,7 +32,7 @@ public:
   SparseMatrix MatrixBuild (); //builds the matrix for the complete ADR equation
   std::vector<double> An_sol (); //returns the analitical solution of the equation on the grid
   void Solver ( std::vector<double>& u_x, double const tol, double const itCheck, int const MaxIter); //solves the ADR equation
-  
+
 
 private:
   unsigned int J_; //number of points in the interior of the set. Boundary are excluded
@@ -44,6 +44,7 @@ private:
   double uL_; //boundary condition at L
 };
 
+//performs the tests required by the assignment instructions
 void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const beta, double const gamma, double const L, double const u0, double const uL, double const tol, double const itCheck, int const MaxIter, std::string ErrorFileName ); //error
 
 #endif

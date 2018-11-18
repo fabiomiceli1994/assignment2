@@ -21,14 +21,14 @@ Adr::Adr ()
   beta_ = 1.;
   gamma_ = 1.;
   L_ = 1.;
-  u0_ =  0.;
+  u0_ =  0.; //BCs given in the assignment
   uL_ = 1.;
 }
 
 //sets the value of the private data
 Adr::Adr ( unsigned int const M, double const a, double const b, double const c, double l, double b_0, double b_L ) // M being the # of points in the interior of the interval
 {
-  if( M>0 )
+  if( M>0 ) //number of points in the interior of the interval has to be strictly positive
   {
     J_ = M;
     alpha_ = a;
@@ -37,7 +37,7 @@ Adr::Adr ( unsigned int const M, double const a, double const b, double const c,
     L_ = l;
     u0_ = b_0;
     uL_ = b_L;
-  }else
+  }else //exits with warning
   {
     std::cout << "Error. The number of points inserted by input is not strictly positive." << std::endl;
     exit(EXIT_FAILURE);
@@ -107,7 +107,7 @@ double Adr::getuL () const
 //builds the matrix for the Laplacian
 SparseMatrix Adr::MatrixBuild ()
 {
-  SparseMatrix A = SparseMatrix( J_, J_);
+  SparseMatrix A = SparseMatrix( J_, J_); //constructor of SparseMatrix
   double h = L_/(J_+1); //mesh size
   double c_lap = -alpha_/(h*h); //multiplicative scalar for laplacian
   double c_grad = beta_/(2.*h); //multiplivative scalar for gradient
@@ -141,7 +141,7 @@ std::vector<double> Adr::An_sol ( )
   {
     double c = beta_/alpha_; //exponent
     double h = L_/(J_+1); //mesh size
-    for(unsigned int i=0; i<J_; ++i)
+    for(unsigned int i=0; i<J_; ++i) //assigning values in the interval
     {
       sol[i] = (1.-exp(c*h*(i+1)))/(1.-exp(c*L_));
     }
@@ -153,7 +153,7 @@ std::vector<double> Adr::An_sol ( )
     {
       sol[i] = (sinh(c*h*(i+1)))/(sinh(c*L_));
     }
-  }else if( alpha_!=0 && beta_==0 && gamma_==0 )
+  }else if( alpha_!=0 && beta_==0 && gamma_==0 ) //straight line case
   {
     for(unsigned int i=0; i<J_; ++i)
     {
@@ -166,6 +166,7 @@ std::vector<double> Adr::An_sol ( )
     exit(EXIT_FAILURE);
   }
 
+  //inserting the BCs
   sol.insert(sol.begin(), u0_);
   sol.push_back(uL_);
   return sol;
@@ -189,7 +190,7 @@ void Adr::Solver ( std::vector<double>& u_x, double const tol, double const itCh
   f[0] = u0_*( ( alpha_/(h*h) ) + ( beta_/(2*h) ) ); //first boundary condition
   f[J_-1] = uL_*( ( alpha_/(h*h) ) - ( beta_/(2*h) ) ); //second boundary condition
 
-  std::string Filename, Filename2;
+  std::string Filename, Filename2; //needed to have a variable output if the parameters vary
 
   if(alpha_!=0 && gamma_==0) //checking non degeneracy and which type of equation has been chosen
   {
@@ -225,9 +226,11 @@ void Adr::Solver ( std::vector<double>& u_x, double const tol, double const itCh
   myFile.width(25);
   myFile << std::left << "2-Value" << std::endl;
 
+  //Gauss-Seidel solves in the interior of the interval. I put the boundary conditions in now
   u_x.insert(u_x.begin(), u0_);
   u_x.push_back(uL_);
 
+  //printing the solution at each point of the grid
   for(unsigned int i=0; i<u_x.size(); ++i)
   {
     myFile.width(25);
