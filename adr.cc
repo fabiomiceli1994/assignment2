@@ -262,13 +262,13 @@ void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const
     std::cout << "Failed to open the file." <<std::endl;
   }
   //making the file human readable
-  myOutFile << "#Details of numerical method ADR equation through Gauss-Seidel algorithm for alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << "." <<std::endl;
+  myOutFile << "#Details of numerical method for ADR equation through Gauss-Seidel algorithm for alpha=" << alpha << ", beta=" << beta << ", gamma=" << gamma << "." <<std::endl;
   myOutFile.width(25);
   myOutFile << std::left << "#1-Mesh size" ;
   myOutFile.width(25);
   myOutFile << std::left << "2-Error (LinfNorm)" ;
   myOutFile.width(25);
-  myOutFile << std::left << "3-Error Ratios" << std::endl;
+  myOutFile << std::left << "3-log2(Error Ratios)" << std::endl;
   for(unsigned int j=0; j<Jvec.size(); ++j) //looping over the different number of points chosen
   {
     Adr eq = Adr(Jvec[j], alpha, beta, gamma, L, u0, uL);

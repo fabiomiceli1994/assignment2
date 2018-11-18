@@ -1,4 +1,4 @@
-#Details of numerical method Gauss Seidel for a linear sistem Ax = b through Gauss-Seidel algorithm. A is 79x79 matrix. x and b are 79vectors.
+#Details of numerical method Gauss Seidel for a linear sistem Ax = b through Gauss-Seidel algorithm. A is 79x79 matrix.
 # 1-iterations 2-residual (LinfNorm)    
 0              6400                     
 1              3200                     

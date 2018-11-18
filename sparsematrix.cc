@@ -225,7 +225,7 @@ void SparseMatrix::Gauss_Seidel( std::vector<double>& x_0, const std::vector<dou
     std::cout << "Failed to open the file." <<std::endl;
   }
 
-  myOutFile << "#Details of numerical method Gauss Seidel for a linear sistem Ax = b through Gauss-Seidel algorithm. A is " << getRowSize() << "x" << getColSize() << " matrix. x and b are " << b.size() << "vectors." << std::endl;
+  myOutFile << "#Details of numerical method Gauss Seidel for a linear sistem Ax = b through Gauss-Seidel algorithm. A is " << getRowSize() << "x" << getColSize() << " matrix." << std::endl;
   myOutFile.width(15);
   myOutFile << std::left << "# 1-iterations" ;
   myOutFile.width(25);

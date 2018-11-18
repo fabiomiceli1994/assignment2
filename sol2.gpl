@@ -2,7 +2,7 @@
 reset
 set terminal pdf
 set output 'ADRsol2.pdf'
-set xlabel "j"
+set xlabel "x_{j}"
 set ylabel "u(x_{j})"
 set key left top
 set title "Solutions for P_{e}=1.000000"

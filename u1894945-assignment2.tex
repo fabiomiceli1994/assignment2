@@ -152,6 +152,7 @@ u(x\pm h)=u(x)\pm hu'(x)+\frac{h^2}{2}u''(x)\pm \frac{h^3}{3!}u'''(x)+\frac{h^4}
 Inserting Eqn.\eqref{eqn:Taylor-exp} into Eqn.\ref{eqn:finite-diff-lap} and Eqn.\eqref{eqn:finite-diff-grad}, it is easy to see that:
 
 \begin{align}
+	\label{eqn:order-consistency}
 	\frac{u(x+h)-2u(x)+u(x-h)}{h^2}=u''(x)+\frac{h^2}{12}u^{(4)}(x)+\mathcal{O}(h^4)\\
 	\frac{u(x+h)-u(x-h)}{2h}=u'(x)+\frac{h^2}{6}u'''(x)+\mathcal{O}(h^4)
 \end{align}
@@ -239,7 +240,7 @@ The practical meaning of the previous definitions is as follows: Taylor’s theo
 	Hence, by consistency, the method is convergent.
 \end{proof}
 
-It is worth noticing that the calculation just presented also shows that the order of convergence is at least equal to the order of consistency.\\
+It is worth noticing that the calculation just presented also shows that the order of convergence is at least equal to the order of consistency of the method and also that every result concerning stability, consistency or convergence is inevitably norm dependent.\\
 
 \subsection{The present case}
 \label{subsec:the-present-case}
@@ -349,11 +350,11 @@ Eqn.(\ref{eqn:matrix-form}) then reads:
 
 \begin{align*}
 	\begin{pmatrix}
-	\frac{\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h} & 0 & 0 & 0 & \cdots & 0 & 0\\
-	-\frac{\alpha}{h^2}+\frac{\beta}{2h} & \frac{\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h} & 0 & 0 & \cdots & 0 & 0\\
-	0 & -\frac{\alpha}{h^2}+\frac{\beta}{2h} & \frac{\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h} & 0 & \cdots & 0 & 0\\
+	\frac{2\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h} & 0 & 0 & 0 & \cdots & 0 & 0\\
+	-\frac{\alpha}{h^2}+\frac{\beta}{2h} & \frac{2\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h} & 0 & 0 & \cdots & 0 & 0\\
+	0 & -\frac{\alpha}{h^2}+\frac{\beta}{2h} & \frac{2\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h} & 0 & \cdots & 0 & 0\\
 	\vdots & \vdots & \ddots & \ddots & \ddots & \cdots & \vdots & \vdots \\
-	0 & 0 & \cdots & \cdots & \cdots & \cdots &  \frac{\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h}\\
+	0 & 0 & \cdots & \cdots & \cdots & \cdots &  \frac{2\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h}\\
 	\end{pmatrix}
 	\begin{pmatrix}
 	u_1\\
@@ -388,7 +389,10 @@ The solutions $u(x)$ obtained for the different cases, indexed by the value of $
 Finally, the distance between the exact solution and the approximate one, in the $L_\infty$ is printed on \emph{Errors$\_$P$\_$numb$\_$...txt} files. Unsurprisingly, the error becomes smaller as the mesh size decreases.\\
 The correctness of the algorithm has been tested for different values of $h$, as required by the assignment. The values of the mesh size have been chosen to be:
 
-$$h=\lbrace10, 20, 40, 80, 160, 320, 640\rbrace$$
+\begin{align}
+	\label{eqn:h-choice}
+	h=\lbrace10, 20, 40, 80, 160, 320, 640\rbrace
+\end{align}
 
 Keeping the P\'{e}clet number fixed, the same equation has been solved for all the previous mesh sizes. The results are reported in the following.\\
 
@@ -453,11 +457,11 @@ Finally, solutions to Eqn.\eqref{eqn:AD} have been studied in the case of large 
 The choice of the values of $\alpha$and $\beta$ has been made through the following criterion.\\
 A sufficient condition for the Gauss-Seidel method to converge is that the matrix $A$ which the algorithm has to invert is strictly diagonally dominant (see \cite{numerical-math}). In the present case, such a condition is satisfied if:
 
-$$\left\|\frac{2\alpha}{h^2}\right\|> \left\|\frac{\alpha}{h^2}+\frac{\beta}{2h}\right\| + \left\|-\frac{2\alpha}{h^2}+\frac{\beta}{2h}\right\|$$
+$$\left\|\frac{2\alpha}{h^2}\right\|> \left\|\frac{\alpha}{h^2}+\frac{\beta}{2h}\right\| + \left\|-\frac{\alpha}{h^2}+\frac{\beta}{2h}\right\|$$
 
 However:
 
-$$\left\|\frac{\beta}{h}\right\|= \left\|-\frac{\alpha}{h^2}+\frac{\beta}{2h}+\frac{\alpha}{h^2}+\frac{\beta}{2h}\right\|\le $$
+$$\left\|\frac{\beta}{h}\right\|= \left\|-\frac{\alpha}{h^2}+\frac{\beta}{2h}+\frac{\alpha}{h^2}+\frac{\beta}{2h}\right\|$$
 
 So that, in order to have strict diagonally dominance, it must be:
 
@@ -467,15 +471,90 @@ Hence, for $L=1$, remembering that $h=\frac{1}{J+1}$, one has that a sufficient 
 
 $$J>\mathbb{P}_e-1$$
 
-The choice of $\alpha=1$ and $\beta=21$ satisfy the above condition. It was explicitly checked during the construction of the program that the choice of a great $\beta$ greater (e.g. $\beta=1000$) does not allow the algorithm to converge and the program exits with an appropriate warning to the user. Clearly, large values of $\beta$ can be tested with large enough $J$, so that the previous inequality is satisfied.\\
+The choice of $\alpha=1$ and $\beta=21$ satisfy the above condition. It was explicitly checked during the construction of the program that the choice of a great $\beta$ (e.g. $\beta=1000$) does not allow the algorithm to converge and the program exits with an appropriate warning to the user. Clearly, large values of $\beta$ can be tested with large enough $J$, so that the previous inequality is satisfied.\\
 
 \subsection{Error analysis and order of convergence}
 As required by the assignment, errors on the solution have been computed and analysed. Not surprisingly, the distance between analytical and the approximate solution becomes smaller when the mesh size decreases.\\
-The study of such errors becomes of great importance to determine the order of convergence of the method. Assume the FD method here used is consistent of order p, then:
+The study of such errors becomes of great importance to determine the order of convergence of the method. Assume the FD method here used is convergent of order p, then:
 
-$$\left\|\frac{\mathcal{L}_h[r_hu]-f_h}{\mathcal{L}_{\frac{h}{2}}\left[r_\frac{h}{2}u\right]-f_\frac{h}{2}}\right\|=\frac{Ch^p+\mathcal{O}(h^{p+1})}{C\left(\frac{h}{2}\right)^p+\mathcal{O}(h)^{p+1}}=2^p$$
+$$\left\|\frac{r_hu-u}{r_{\frac{h}{2}}u-u}\right\|_{\bar{\mathbb{U}}_h}=\frac{Ch^p+\mathcal{O}(h^{p+1})}{C\left(\frac{h}{2}\right)^p+\mathcal{O}(h)^{p+1}}= 2^p+\mathcal{O}(h)$$
 
-where $\mathcal{O}(h^{p+1})$ terms were neglected.\\
+Passing to the logarithms:
+
+\begin{align}
+	\label{eqn:log-conv}
+	\log_2\left\|\frac{r_hu-u}{r_{\frac{h}{2}}u-u}\right\|_{\bar{\mathbb{U}}_h}=p+\mathcal{O}(h)
+\end{align}
+
+The order of convergence of a method can thus be evaluated by means of studying the behaviour of the distance in the $\bar{\mathbb{U}}_h$ norm between the discretised and the exact solution to a given problem.\\
+The choice of progressively reducing by a factor 2 the values of $h$ (see Eqn.\eqref{eqn:h-choice}) should now appear clear: such a choice guarantees that the data are uniformly distributed on a logarithmic scale, which, in turn, makes the analysis of the errors simpler.\\
+As already mentioned, in the present case the $L_{\infty}$ norm (or discrete $L_\infty$) has been chosen: being that consistency, convergence and stability are norm dependent properties, every result presented in the following has to be interpreted as referred to this particular choice.\\
+
+A systematic study of the error for different P\'{e}clet numbers and different mesh sizes has been made. The obtained results are summarised in the following plot.\\
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1.0\textwidth]{ADRer.pdf}
+	\end{center}
+	\caption{Graphical representation of the error between the exact and the approximate solution of Eqn.\eqref{eqn:AD} for different P\'{e}clet numbers on a log-log scale. The analytical profile $h^2$, computed at the values of $h$ used in the different tests, has been inserted in the plot to allow an immediate comparison with the empirical profile obtained.
+		\label{fig:errors}}
+\end{figure}
+
+Fig.\ref{fig:errors} shows a clear dependence of the error empirical profiles on the P\'{e}clet number. In particular, it is apparent that when $\mathbb{P}_e<<1$ the error scale uniformly on a logarithmic scale with respect to h.\\
+For $\mathbb{P}_e\ge 1$ the empirical profiles become very similar to the analytical $h^2$ one, suggesting that the order of convergence of the method is equal to 2. The curve obtained in the case of $\mathbb{P}_e=1$ shows another interesting feature, i.e. the presence of a \emph{plateau} for small $h$ values. This is, however, not surprisingly: the error cannot become arbitrarly small when the mesh size decreases and a saturation of the performances of the method for small enough $h$ is expected. As a matter of fact, a saturation for large values of the mesh size is expected as well: such a region, however, is not extremely interesting from a numerical point of view (it is just signalling that the choice of the mesh size has not been made optimally) and has not been investigated.\\
+A more precise analysis can be performed looking at the content of the file \emph{Errors$\_$P$\_$numb$\_$10.500000.txt}, which is reported in the following:
+\\
+\\
+\\
+\\
+\\
+
+  
+\begin{lstlisting}
+Details of numerical method for ADR equation through Gauss-Seidel algorithm for alpha=1, beta=21, gamma=0.
+#1-Mesh size             2-Error (LinfNorm)       3-log2(Error Ratios)     
+0.1                      0.146847                 	                        
+0.05                     0.0384623                1.93279                  
+0.025                    0.0086967                2.14491                  
+0.0125                   0.00212548               2.03268                  
+0.00625                  0.000528445              2.00797                  
+0.003125                 0.00013208               2.00034                  
+0.0015625                3.30134e-05              2.00029 
+\end{lstlisting}
+
+
+The third column of the file contains the results of Eqn.\eqref{eqn:log-conv} for $\mathbb{P}_e=10.500$. It is evident that the method has indeed order of convergence 2.\\
+By means of computing the empirical mean and standard error of the numerical results obtained, one has:
+
+\begin{align}
+	\label{eqn:order-of-convergence}
+	O_c = 2.02 \pm 0.07
+\end{align} 
+
+where $O_c$ represents the order of convergence of the method.\\
+The result is justifiable through Thm.\ref{thm:stab-conv}, which, as already pointed out, shows that, for stable methods, the order of convergence is at least the order of consistency of the method.\\
+From Eqn.\eqref{eqn:order-consistency} it is easy to see that the order consistency of the method is 2. However, the stability has not been proven yet. The following theorem provides a sufficient condition for the stability of the method:
+
+\begin{theorem}
+	\label{thm:stability-thm}
+	Let $A\in\mathbb{R}^{N\times N}$ be an $M-matrix$ and assume there exists a vector $\Phi\in\mathbb{R}^{N}$ with $\Phi>0$ and $A\Phi >0$. Then:
+	
+	$$||x||_{\infty, h}\le C_\Phi||Ax||_{\infty, h}, \hspace{5mm}C_\Phi=\frac{\max\limits_{i}\Phi}{\min\limits_{i} A\Phi},\hspace{3mm} i>0\in\lbrace 1,\cdots, N\rbrace$$
+\end{theorem}
+
+
+
+$$\left\|\frac{r_hu-u}{r_{\frac{h}{2}}u-u}\right\|\le\left\|\frac{\mathcal{L}_h[r_hu]-f_h}{\mathcal{L}_{\frac{h}{2}}\left[r_\frac{h}{2}u\right]-f_\frac{h}{2}}\right\|=\frac{Ch^p+\mathcal{O}(h^{p+1})}{C\left(\frac{h}{2}\right)^p+\mathcal{O}(h)^{p+1}}= 2^p+\mathcal{O}(h)$$
+
+
+
+
+
+
+
+
+
+
 \section{Conclusive remarks}
 In this section some additional comments and observation are presented.
 

@@ -2,7 +2,7 @@
 reset
 set terminal pdf
 set output 'ADRsol3.pdf'
-set xlabel "j"
+set xlabel "x_{j}"
 set ylabel "u(x_{j})"
 set yrange [-0.05:1.1]
 set xrange [0:1.01]

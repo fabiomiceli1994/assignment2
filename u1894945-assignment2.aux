@@ -25,6 +25,7 @@
 \newlabel{eqn:finite-diff-lap}{{2}{2}{Finite difference methods}{equation.1.2}{}}
 \newlabel{eqn:finite-diff-grad}{{3}{2}{Finite difference methods}{equation.1.3}{}}
 \newlabel{eqn:Taylor-exp}{{4}{2}{Finite difference methods}{equation.1.4}{}}
+\newlabel{eqn:order-consistency}{{5}{2}{Finite difference methods}{equation.1.5}{}}
 \newlabel{eqn:BVP-discrete}{{7}{3}{Finite difference methods}{equation.1.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Consistency, convergence and stability of FD methods}{3}{subsection.1.3}}
 \newlabel{eqn:BVP-general-discr}{{8}{3}{Consistency, convergence and stability of FD methods}{equation.1.8}{}}
@@ -56,6 +57,7 @@
 \newlabel{eqn:AD}{{21}{7}{Testing correctness}{equation.2.21}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Results of the tests}{8}{subsection.2.4}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.1}Solutions to the AD equation}{8}{subsubsection.2.4.1}}
+\newlabel{eqn:h-choice}{{22}{8}{Solutions to the AD equation}{equation.2.22}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.2}Small P\'{e}clet numbers}{8}{subsubsection.2.4.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Graphical representation of the solution to Eqn.\textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces \ref  {eqn:AD}\unskip \@@italiccorr )}} for $\alpha =1.0$ , $\beta =0.0$. The solutions for different mesh sizes overlap, so that only the last one is distinguishable. }}{9}{figure.1}}
 \newlabel{fig:P_0}{{1}{9}{Graphical representation of the solution to Eqn.\eqref {eqn:AD} for $\alpha =1.0$ , $\beta =0.0$. The solutions for different mesh sizes overlap, so that only the last one is distinguishable}{figure.1}{}}
@@ -71,11 +73,16 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Graphical representation of the solution to Eqn.\textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces \ref  {eqn:AD}\unskip \@@italiccorr )}} for $\alpha =1.0$ , $\beta =21.0$. The solutions overlap for $h\ge 0.025$. }}{12}{figure.5}}
 \newlabel{fig:P_10.5}{{5}{12}{Graphical representation of the solution to Eqn.\eqref {eqn:AD} for $\alpha =1.0$ , $\beta =21.0$. The solutions overlap for $h\ge 0.025$}{figure.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Error analysis and order of convergence}{13}{subsection.2.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Conclusive remarks}{13}{section.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Memory}{13}{subsection.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Performances}{14}{subsection.3.2}}
-\newlabel{subsec:perf}{{3.2}{14}{Performances}{subsection.3.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Possible solutions}{14}{subsubsection.3.2.1}}
+\newlabel{eqn:log-conv}{{23}{13}{Error analysis and order of convergence}{equation.2.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Graphical representation of the error between the exact and the approximate solution of Eqn.\textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces \ref  {eqn:AD}\unskip \@@italiccorr )}} for different P\'{e}clet numbers on a log-log scale. The analytical profile $h^2$, computed at the values of $h$ used in the different tests, has been inserted in the plot to allow an immediate comparison with the empirical profile obtained. }}{14}{figure.6}}
+\newlabel{fig:errors}{{6}{14}{Graphical representation of the error between the exact and the approximate solution of Eqn.\eqref {eqn:AD} for different P\'{e}clet numbers on a log-log scale. The analytical profile $h^2$, computed at the values of $h$ used in the different tests, has been inserted in the plot to allow an immediate comparison with the empirical profile obtained}{figure.6}{}}
+\newlabel{eqn:order-of-convergence}{{24}{15}{Error analysis and order of convergence}{equation.2.24}{}}
+\newlabel{thm:stability-thm}{{2}{15}{}{theorem.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Conclusive remarks}{15}{section.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Memory}{15}{subsection.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Performances}{16}{subsection.3.2}}
+\newlabel{subsec:perf}{{3.2}{16}{Performances}{subsection.3.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Possible solutions}{16}{subsubsection.3.2.1}}
 \bibcite{numerical-math}{1}
 \bibcite{lec-notes}{2}
 \bibdata{bibliography}

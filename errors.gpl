@@ -6,6 +6,7 @@ set xlabel "h"
 set ylabel "Error"
 set key left top
 set yrange [10**(-11):100]
+set xrange [0.001495:0.105]
 set logscale xy
 set style line 1 \
     linecolor rgb '#ff0000' \
