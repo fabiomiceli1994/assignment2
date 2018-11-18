@@ -114,7 +114,7 @@ Student Number: 1894945
 
 \begin{definition}
 	\label{defn:BVP}
-	Let $\Omega\in\mathbb{R}^{d}$, for $d=\lbrace 1, 2\rbrace$ be a bounded, simply connected, open domain. The Boundary Value Problem (BVP) that will be considered in the following is find, for $f$ and $v$ given, a function $u$ such that 
+	Let $\Omega\in\mathbb{R}^{d}$, for $d=\lbrace 1, 2\rbrace$ be a bounded, simply connected, open domain. The Boundary Value Problem (BVP) that will be considered in the following is: find, for $f$ and $v$ given, a function $u$ such that 
 	\begin{equation}
 		\label{eqn:BVP}
 		\mathcal{L}[u]=f\hspace{3mm}in\hspace{1mm}\Omega,\hspace{15mm}u=v\hspace{3mm}on\hspace{1mm}\partial\Omega
@@ -126,9 +126,9 @@ Student Number: 1894945
 BVPs like this one are called Dirichlet problems. In what follows, for simplicity, everything will be referred to the case $d=1$. 
 
 \subsection{Finite difference methods}
-The discretisations that will be consider in the following are based on the finite difference (FD) approach. The spatial operator $\mathcal{L}$ is evaluated at a set of points $\lbrace x_j\rbrace_{j=1}^{J}$ and the derivatives are replaced with difference quotients of the approximate solution u, which are in turn obtained by truncating (at the desired order of accuracy) the Taylor expansions of the exact solution u(x) around the point $x_j$.\\
+The discretisations that will be consider in the following are based on the finite difference (FD) approach. The spatial operator $\mathcal{L}$ is evaluated at a set of points $\lbrace x_j\rbrace_{j=1}^{J}$ and the derivatives are replaced with difference quotients of the approximate solution u, which are in turn obtained by truncating (at the desired order of accuracy) the Taylor expansions of the exact solution u(x) around the point $x_j$, $j\in\lbrace1,\cdots, J\rbrace$.\\
 
-Let $\lbrace x_j\rbrace_{j=0}^{J+1}$ be a partition of the interval $(0, L)$, $L\in\mathbb{R}^+$, such that $0=x_0<x_1<\cdots<x_{J+1}=L$. The $j^{th}$ interval will be denoted by $I_j=(x_{j-1}, x_j)$ with mesh size $h_j=|I_j|$. For simplicity, a uniform mesh size will be considered and denoted by $h$, so that $x_j=jh$.\\
+Let $\lbrace x_j\rbrace_{j=0}^{J+1}$ be a partition of the interval $[0, L]$, $L\in\mathbb{R}^+$, such that $0=x_0<x_1<\cdots<x_{J+1}=L$. The $j^{th}$ interval will be denoted by $I_j=(x_{j-1}, x_j)$ with mesh size $h_j=|I_j|$. For simplicity, a uniform mesh size will be considered and denoted by $h$, so that $x_j=jh$.\\
 Moreover let $u_j$ represents the approximation to the exact solution $u(x_j)$. Then, a simple discrete version of the operator $\Delta$ in \eqref{eqn:BVP} is, for $j=\lbrace 1, \cdots, J\rbrace$, given by:
 
 \begin{align}
@@ -143,13 +143,13 @@ Similarly, the operator $\nabla [u]$ can be discretised as :
 \Delta[u]=\frac{u_{j+1}-u_{j-1}}{2h}
 \end{align}
 
-Such choices guarantee that the differences between \eqref{eqn:finite-diff-lap} and \eqref{eqn:finite-diff-grad} and their respective continuous counterparts is, at most, $\mathcal{O}(h^2)$, as the following simple calculation explicitly shows. 
+Such choices guarantee that the differences between \eqref{eqn:finite-diff-lap} and \eqref{eqn:finite-diff-grad} and their respective continuous counterparts are at most $\mathcal{O}(h^2)$, as the following simple calculation explicitly shows. 
 
 \begin{equation}\label{eqn:Taylor-exp}
 u(x\pm h)=u(x)\pm hu'(x)+\frac{h^2}{2}u''(x)\pm \frac{h^3}{3!}u'''(x)+\frac{h^4}{4!}u^{(4)}(x)+\mathcal{O}(h^5)
 \end{equation}
 
-Inserting Eqn.\eqref{eqn:Taylor-exp} into Eqn.\ref{eqn:finite-diff-lap} and Eqn.\eqref{eqn:finite-diff-grad}, it is easy to see that:
+Inserting Eqn.\eqref{eqn:Taylor-exp} into Eqn.\eqref{eqn:finite-diff-lap} and Eqn.\eqref{eqn:finite-diff-grad}, it is easy to see that:
 
 \begin{align}
 	\label{eqn:order-consistency}
@@ -157,9 +157,9 @@ Inserting Eqn.\eqref{eqn:Taylor-exp} into Eqn.\ref{eqn:finite-diff-lap} and Eqn.
 	\frac{u(x+h)-u(x-h)}{2h}=u'(x)+\frac{h^2}{6}u'''(x)+\mathcal{O}(h^4)
 \end{align}
 
-The operators defined in Eqn.\ref{eqn:finite-diff-lap} and Eqn.\eqref{eqn:finite-diff-grad} are \emph{central differences} and will be used for the implementation of the code.\\
+The operators defined in Eqn.\eqref{eqn:finite-diff-lap} and Eqn.\eqref{eqn:finite-diff-grad} are \emph{central differences} and will be used for the implementation of the code.\\
 
-The BVP \eqref{eqn:BVP}, can thus be discretised as:
+Problem \eqref{eqn:BVP}, can thus be discretised as:
 
 \begin{align}\label{eqn:BVP-discrete}
 \begin{split}
@@ -176,12 +176,12 @@ The following discrete function spaces will play an important role in the study 
 	&{\mathbb{U}}_h=\lbrace u:\Omega_h\rightarrow\mathbb{R}\rbrace
 \end{align*}
 
-where the domain $\bar{\Omega}_h\equiv\lbrace x_j\rbrace_{j=0}^{J+1}$, while $\Omega_h$ represents the set of points in the interior of $\Omega$.\\
+where $\bar{\Omega}_h\equiv\lbrace x_j\rbrace_{j=0}^{J+1}$ and $\Omega_h$ represents the set of points in the interior of $\Omega$.\\
 It also convenient to introduce the following \emph{restriction operator} $r_h:C(\bar{\Omega})\rightarrow\bar{\mathbb{U}}_h$ defined as:
 
 $$[r_h v]_j=v(x_j),\hspace{5mm}j\in\lbrace 1, \cdots, J\rbrace,\hspace{5mm} v\in C(\Omega)$$
 
-Such an operator allows to compare $C(\bar{\Omega})$ functions with grid functions.\\
+which allows for comparison between $C(\bar{\Omega})$ functions and grid functions.\\
 
 Clearly, the discrete problem \eqref{eqn:BVP-discrete} can be now stated as:
 
@@ -193,9 +193,9 @@ where $\mathcal{L}_h:\bar{\mathbb{U}}_h\rightarrow\mathbb{U}_h$ represents both 
 
 \begin{definition}
 	\label{defn:consistency}
-	The consistency error of the method \eqref{eqn:BVP-general-discr} relative to the exact solution u(x) in a suitable discrete norm is
+	The consistency error of the method \eqref{eqn:BVP-general-discr} relative to the exact solution u(x) in a suitable discrete norm (see \cite{lec-notes}) is:
 	$$e_c=||\bar{\mathcal{L}}_h[r_hu]-f_h||_{\mathbb{U}_h} $$
-	The discretisation is said to be \emph{consistent} if 
+	The discretisation is said to be \emph{consistent} if: 
 	\begin{equation}
 		\label{eqn:consistent}
 		e_c\rightarrow 0\hspace{3mm}\text{as}\hspace{3mm}h\rightarrow 0
@@ -208,12 +208,12 @@ where $\mathcal{L}_h:\bar{\mathbb{U}}_h\rightarrow\mathbb{U}_h$ represents both 
 \end{definition}
 
 \begin{definition}
-	The discretisation is said to be \emph{convergent} if 
+	The discretisation is said to be \emph{convergent} if: 
 	\begin{equation}
 	\label{eqn:convergent}
 	||r_h u-u_h||_{{\bar{\mathbb{U}}}_h}\rightarrow 0\hspace{3mm}\text{as}\hspace{3mm}h\rightarrow 0
 	\end{equation}
-	The discretisation is said to be \emph{convergent} of order p if 
+	The discretisation is said to be \emph{convergent} of order p if: 
 	\begin{equation}
 	\label{eqn:convergent-p}
 	||r_h u-u_h||_{{\bar{\mathbb{U}}}_h}\rightarrow \mathcal{O}(h^p)\hspace{3mm}\text{as}\hspace{3mm}h\rightarrow 0
@@ -221,7 +221,7 @@ where $\mathcal{L}_h:\bar{\mathbb{U}}_h\rightarrow\mathbb{U}_h$ represents both 
 \end{definition}
 
 \begin{definition}
-	The method is \emph{stable} for some constant $C>0$ if
+	The method is \emph{stable} for some constant $C>0$ if:
 	\begin{equation}
 	\label{eqn:stable}
 	||v_h - w_h||_{{\bar{\mathbb{U}}}_h}\le C||\bar{\mathcal{L}}_h[v_h]-\bar{\mathcal{L}}_h[w_h]||_{{{\mathbb{U}}}_h}\hspace{4mm} \forall v_h,w_h\in\bar{\mathbb{U}}_h
@@ -245,7 +245,7 @@ It is worth noticing that the calculation just presented also shows that the ord
 \subsection{The present case}
 \label{subsec:the-present-case}
 In the present assignment, special cases of an 1D linear advection-diffusion-reaction problem are studied. Such equations describe the advection, diffusion and reaction (sometimes the term absorption is used) of a given quantity represented by $u(x)$: typical example can be picked from hydrodynamics and from physics in general.\\
-The problem can be formulated as follows. Given $f\in C([0, L])$, find $u\in C^2(0, L)$ such that:
+The problem can be formulated as follows. Given $f\in C([0, L])$, find $u\in C^2([0, L])$ such that:
 
 \begin{equation}
 	\label{eqn:ass-prob}
@@ -286,43 +286,45 @@ If $\gamma$ is set to $0$ in \eqref{eqn:ass-prob}, a simpler problem, composed o
 	u(x)=\frac{1-e^{\frac{\beta}{\alpha}x}}{1-e^{\frac{\beta}{\alpha}L}},\hspace{5mm} 0\le x\le L
 \end{align}
 
-It is clear that the solution can be rewritten as a parametric function of the global P\'{e}clet number $\mathbb{P}_e=\frac{|\beta|L}{2\alpha}$, measures the dominance of the advective term over the diffusive one. Setting $L=1$ as required by the assignment instructions and assuming $\beta>0$ for simplicity, one has:
+It is clear that the solution can be rewritten as a parametric function of the global P\'{e}clet number $\mathbb{P}_e=\frac{|\beta|L}{2\alpha}$, which measures the dominance of the advective term over the diffusive one. Setting $L=1$ as required by the assignment instructions and assuming $\beta>0$ for simplicity, one has:
 
 $$	u(x)=\frac{1-e^{2\mathbb{P}_ex}}{1-e^{2\mathbb{P}_e}}, \hspace{5mm} 0\le x\le 1 $$
 
 In order to have a more clear interpretation of the results presented in the following sections, it is worth studying the limit of both large and small global P\'{e}clet number.\\
-If $\frac{\beta}{\alpha}<<1$, a simple Taylor expansion up to first order of \eqref{eqn:AD-sol} yields:
+If $\frac{\beta}{\alpha}<<1$, a simple Taylor expansion up to first order of Eqn.\eqref{eqn:AD-sol} yields:
 
 \begin{equation}
 	\label{key:AD-smallP}
 	u(x)\approx\frac{\frac{\beta}{\alpha}x}{\frac{\beta}{\alpha}}=x
 \end{equation}
 
-The dominance of $\alpha$ with respect to $\beta$ makes the solution closer to the one of the problem $\alpha u''(x)=0$ with the same boundary conditions (BC). On the other hand, for $\frac{\beta}{\alpha}>>1$ one has:
+The dominance of $\alpha$ with respect to $\beta$ makes the solution closer to the one of the problem
+$$-\alpha u''(x)=0$$
+with the same boundary conditions (BCs). On the other hand, for $\frac{\beta}{\alpha}>>1$ one has:
 
 \begin{equation}
 \label{key:AD-bigP}
-u(x)\approx\frac{\frac{\beta}{\alpha}x}{\frac{\beta}{\alpha}}=e^{\frac{\beta}{\alpha}(x-1)}=e^{-\frac{\beta}{\alpha}(1-x)}
+u(x)\approx e^{\frac{\beta}{\alpha}(x-1)}=e^{-\frac{\beta}{\alpha}(1-x)}
 \end{equation}
 
-Since the exponent is big and negative the solution is almost equal to zero everywhere unless a small neighbourhood of the point $x=1$ where the term $ 1-x $ becomes very small and the solution joins the value $1$ with an exponential behaviour. The width of the neighbourhood is of the order of $\frac{\alpha}{\beta}$ and thus it is quite small: in such an event, we say that the solution exhibits a boundary layer of width $\mathcal{O}\left(\frac{\alpha}{\beta}\right)$ at $x=1$ (see Ref.\cite{numerical-math}).
+Since the exponent is big and negative the solution is almost equal to zero everywhere unless a small neighbourhood of the point $x=1$ where the term $ 1-x $ becomes very small and the solution joins the value $1$ with an exponential behaviour. The width of the neighbourhood is of the order of $\frac{\alpha}{\beta}$ and thus it is quite small: in such an event, we say that the solution exhibits a boundary layer of width $\mathcal{O}\left(\frac{\alpha}{\beta}\right)$ at $x=1$ (see \cite{numerical-math}).
 
 \subsubsection{The diffusion-reaction problem}
-On the other hand, if $\beta$ is set to zero, the solution to the corresponding problem (for the same BC) is given by:
+On the other hand, if $\beta$ is set to zero, the solution to the corresponding problem (for the same BCs) is given by:
 
 \begin{equation}
 	\label{eqn:DR-sol}
 	u(x)=\frac{\sinh(\frac{\gamma}{\alpha}x)}{\sinh(\frac{\gamma}{\alpha}L)},\hspace{5mm} 0\le x\le L
 \end{equation}
 
-In this case, the relevant parameter to study the dominance of the advection with respect to the response terms, is represented by $D_a=\frac{\gamma}{\alpha}$ and is called Damk\"{o}hler number.\\
+In this case, the relevant parameter to the study of the dominance of the advection with respect to the reaction term, is represented by $D_a=\frac{\gamma}{\alpha}$ and is called Damk\"{o}hler number.\\
 
 \section{The program}
 \subsection{Implementation}
 The program is built on the class ADR , which stands for Advection-Diffusion-Reaction. The class has 7 private variables: $J$ (the number of points in the interior of $[0,L]$), $\alpha$, $\beta$, $\gamma$ (the parameters associated to the ADR equation at hand), $L$ (the length of the interval), $u_0$ (the boundary condition at $0$) and $u_L$ (boundary condition at $L$). In this way, once the constructor is called, all the variables and parameters defining problem \eqref{eqn:ass-prob} are set.\\
-As pointed out in $\S$(\ref{subsec:the-present-case}), BVPs can be solved through numerical methods for linear algebra: the member function \emph{MatrixBuild}, which accepts no argument, constructs matrix $A$ of Eqn.\eqref{eqn:matrix-form}, whose entries are given by \eqref{eqn:matrix}, which will be later inverted through the Gauss-Seidel algorithm. Such a construction takes places within the function \emph{Solver}, that performs the tests required by the assignment instructions through the Gauss-Seidel method and outputs the results on different .txt files. For clarity reasons,  each time a simulation is performed, a suitable success message containing the different parameters of the corresponding test, is printed on the terminal. \emph{Solver} is a member function which accepts 4 arguments and implicitly returns the discretised solution \emph{u$\_$x}. The argument \emph{itCheck} represents the number of iterations after which a check for stagnation of the method is performed, while \emph{MaxIter} represents the maximum number of iterations the user is willing ``wait" and \emph{tol} the given tolerance.\\ 
-The member function \emph{An$\_$sol} outputs the analytical solutions at each point of $\Omega_h$, by simply computing either Eqn.\eqref{eqn:AD-sol} or Eqn.\eqref{eqn:DR-sol} at the given set of points. The choice between the two solutions is made by means of an \emph{if} instruction, checking if $\alpha\neq 0, \gamma=0$ or if $\alpha\neq 0, \beta=0$. When none of the above conditions is satisfied, the program exits with an appropriate error message to the user.\\
-Discretised and the analytical solutions are finally compared within the function \emph{ADR$\_$Test}. Such a function take as arguments the values of the private datas, the arguments of $Solver$ and the different values of $J$ the user wants to test on. The function loops over them and prints the final error between the numerical solution and the analytical one, in the $L_\infty$ norm, on suitable .txt files, whose names are defined through the parameters the user has set for the test. The ratio between errors obtained for different mesh sizes is computed and printed, too.\\
+As pointed out in $\S$\ref{subsec:the-present-case}, BVPs can be solved through numerical methods for linear algebra: the member function \emph{MatrixBuild}, which accepts no argument, constructs matrix $A$ of Eqn.\eqref{eqn:matrix-form}, which will be later inverted through the Gauss-Seidel algorithm. Such a construction takes place within the function \emph{Solver}, that performs the tests required by the assignment instructions through the Gauss-Seidel method and outputs the results on different .txt files. For clarity reasons,  each time a simulation is performed, a suitable success message containing the different parameters of the corresponding test, is printed on the terminal. \emph{Solver} is a member function which accepts 4 arguments and implicitly returns the discretised solution \emph{u$\_$x}. The argument \emph{itCheck} represents the number of iterations after which a check for stagnation of the method is performed, while \emph{MaxIter} represents the maximum number of iterations the user is willing ``wait" and \emph{tol} the given tolerance.\\ 
+The member function \emph{An$\_$sol} outputs the analytical solutions at each point of $\Omega_h$, by simply computing either Eqn.\eqref{eqn:AD-sol} or Eqn.\eqref{eqn:DR-sol} at the given set of points. The choice between the two solutions is made by means of an \emph{if} instruction, checking if $\alpha\neq 0, \gamma=0$ or if $\alpha\neq 0, \beta=0$. The special case $\alpha\neq 0, \beta=0, \gamma=0$ is checked as well. If none of the above conditions is satisfied, the program exits with an appropriate error message to the user.\\
+Discretised and the analytical solutions are finally compared within the function \emph{ADR$\_$Test}. Such a function take as arguments the values of the private variables, the arguments of $Solver$ and the different values of $J$ the user wants to test on. The function loops over them and prints the final error between the numerical solution and the analytical one, in the $L_\infty$ norm, on suitable .txt files, whose names are defined through the parameters the user has set for the test. The logarithm of the ratio between errors obtained for different mesh sizes is computed and printed, too.\\
 Since, by means of simply changing the values provided in the main file, both class of equations can be tested with no further modifications to the code, the program can be regarded as particularly flexible.\\
 
 \subsection{Running the program}
@@ -330,7 +332,7 @@ The program is run through the Makefile provided. The current optimisation is se
 The program generates a fixed number of output files, in which the results of the tests have been stored. Some of these files are used to produce plots by means of six different plotscripts.\\ 
 
 \subsection{Testing correctness}
-In order to check the correctness of the implementation of the code, the tests requested by the assignment have been performed. The class of ADR equations chosen as a benchmark is represented by:
+In order to check the correctness of the implementation of the code, the tests requested by the assignment have been performed. The class of ADR equations chosen as a benchmark is the following:
 
 \begin{equation}
 	\label{eqn:AD}
@@ -338,7 +340,7 @@ In order to check the correctness of the implementation of the code, the tests r
 \end{equation}
 
 Nonetheless, the correctness of the code for the other class of equations is easy to verify by means of changing the parameters in the main file. Such a test, whose results will not be reported here, has been successfully performed in the construction of the code.\\
-The solution to Eqn.\eqref{eqn:AD} has been discussed in detail in $\S$(\ref{subsubsec:ADprob}). However, from the numerical point of view, it is important to point out how the presence of a BC implies a suitable modifications of the vector $\mathbf{f}$ to invert against. In fact, if the matrix $A$ is constructed to possess $J$ columns and $J$ rows, since the discrete Laplacian and gradient operators output the value at the point $x_j$ by means of computing functions at the point $x_{j+1}$ and $x_{j-1}$, the values of the function $u(x)$ at the boundary of $\Omega_h$ have to be inserted into the first and last entry of the vector $\mathbf{f}$. Such a construction is performed in the function \emph{Solver} trough the following lines:
+The solution to Eqn.\eqref{eqn:AD} has been discussed in detail in $\S$\ref{subsubsec:ADprob}. However, from the numerical point of view, it is important to point out how BCs imply suitable modifications of the vector $\mathbf{f}$ to invert against. In fact, if the matrix $A$ is constructed to possess $J$ columns and $J$ rows, since the discrete Laplacian and gradient operators take as arguments $x_{j+1}$ and $x_{j-1}$ for the approximation at $x_j$, the values of the function $u(x)$ at the boundary of $\Omega_h$ have to be inserted into the first and last entry of the vector $\mathbf{f}$. Such a construction is performed in the function \emph{Solver} trough the following lines:
 
 \begin{lstlisting}
 f[0] = u0_*( ( alpha_/(h*h) ) + ( beta_/(2*h) ) ); //first boundary condition
@@ -374,7 +376,7 @@ Eqn.(\ref{eqn:matrix-form}) then reads:
 \end{align*}
 
 where $\mathbf{u}$ is the initial guess required by the Gauss-Seidel algorithm to work. In the present case, each component of $\mathbf{u}$ has been set to $0$, so that $u_j=0\hspace{3mm}\forall j\in\lbrace 1,\cdots, J\rbrace$.\\
-Solutions to  Eqn.\eqref{eqn:AD} have been obtained for different values of the mesh size $h=\frac{1}{J+1}$ and different values of the $\mathbb{P}_e$. The error, i.e the distance between the exact solution on the grid and the approximate one in the $L_\infty$ norm, is computed for each solution. As previously mentioned, the ratio between such errors for two successive solutions of the same problem (same $\mathbb{P}_e$, but different $h$) have been computed: the reason for this will be clear in the next sections.\\
+Solutions to  Eqn.\eqref{eqn:AD} have been obtained for different values of the mesh size $h=\frac{1}{J+1}$ and different values of the $\mathbb{P}_e$. The error, i.e the distance between the exact solution on the grid and the approximate one in the (discrete) $L_\infty$ norm, is computed for each solution. As previously mentioned, the logarithm of the ratio between such errors for two successive solutions of the same problem (same $\mathbb{P}_e$, but different $h$) have been computed: the reason for this will be presented in $\S$\ref{subsec:Error}.\\
 
 
 
@@ -385,7 +387,7 @@ In the following, the results of the more significant tests performed will be re
 \subsubsection{Solutions to the AD equation}
 The \emph{ADR$\_$test} function has been shown to work correctly for the following  P\'{e}clet numbers:
 $$\mathbb{P}_e=\lbrace 0.0000, 0.0005, 0.0100, 1.0000, 10.5000 \rbrace$$
-The solutions $u(x)$ obtained for the different cases, indexed by the value of $J$ chosen, can be found in the files $P\_numb\_...\_Solution\_J\_....txt$ , where the dots stand for the different possible values of $\mathbb{P}_e$ and $J$. The residual error at every iteration, in the $L_\infty$ norm, is stored in the files $P\_numb\_...\_Residual\_J\_....txt$, which provide a direct proof of the general correctness of the code.\\
+The solutions $u(x)$ obtained for the different cases, indexed by the respective $J$, can be found in the files $P\_numb\_...\_Solution\_J\_....txt$ , where the dots stand for the different possible values of $\mathbb{P}_e$ and $J$. The residual error at every iteration, in the $L_\infty$ norm, is stored in the files $P\_numb\_...\_Residual\_J\_....txt$, which provide a direct proof of the general correctness of the code.\\
 Finally, the distance between the exact solution and the approximate one, in the $L_\infty$ is printed on \emph{Errors$\_$P$\_$numb$\_$...txt} files. Unsurprisingly, the error becomes smaller as the mesh size decreases.\\
 The correctness of the algorithm has been tested for different values of $h$, as required by the assignment. The values of the mesh size have been chosen to be:
 
@@ -394,7 +396,7 @@ The correctness of the algorithm has been tested for different values of $h$, as
 	h=\lbrace10, 20, 40, 80, 160, 320, 640\rbrace
 \end{align}
 
-Keeping the P\'{e}clet number fixed, the same equation has been solved for all the previous mesh sizes. The results are reported in the following.\\
+Keeping the P\'{e}clet number fixed, solutions have been obtained for all the previous mesh sizes.\\ 
 
 
 \subsubsection{Small P\'{e}clet numbers}
@@ -419,11 +421,11 @@ Solutions to to Eqn.\eqref{eqn:AD} have been studied in the case of small $\math
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{ADRsol4.pdf}
 	\end{center}
-	\caption{Graphical representation of the solution to Eqn.\eqref{eqn:AD} for $\alpha=10.0$ , $\beta=0.1$. The solutions for different mesh sizes overlap, so that only the last one is distinguishable.
+	\caption{Graphical representation of the solution to Eqn.\eqref{eqn:AD} for $\alpha=5.0$ , $\beta=0.1$. The solutions for different mesh sizes overlap, so that only the last one is distinguishable.
 		\label{fig:P_0.01}}
 \end{figure} 
 
-The solutions appear to be straight line on the interval $[0, 1]$. Remembering what has been discussed in $\S$(\ref{subsubsec:ADprob}), such a result does not appear surprising: Fig.\ref{fig:P_0.0005} and Fig.\ref{fig:P_0.01} show the rightfulness of the Taylor expansion performed in Eqn.\eqref{key:AD-smallP}. Finally, Fig.\ref{fig:P_0} shows that the code is able to find the correct solution to the problem also in the case of $\beta=0$. In fact, under these circumstances, Eqn.\eqref{eqn:AD} simplifies to:
+The solutions appear to be straight lines on the interval $[0, 1]$. Remembering what has been discussed in $\S$\ref{subsubsec:ADprob}, such a result does not appear surprising: Fig.\ref{fig:P_0.0005} and Fig.\ref{fig:P_0.01} are in good agreement with the Taylor expansion performed in Eqn.\eqref{key:AD-smallP}. Finally, Fig.\ref{fig:P_0} shows that the code is able to find the correct solution to the problem also in the case of $\beta=0$. In fact, under these circumstances, Eqn.\eqref{eqn:AD} simplifies to:
 
 $$-\alpha u''(x)=0$$
 
@@ -444,7 +446,7 @@ The exponential behaviour of the solution is now evident. In fact, in the presen
 Solutions overlap in this case as well, but small differences between them are noticeable for big enough j: by means of a suitable zoom on the plot, it is possible to see that the red and blue curve present a slightly different profile.\\
 
 \subsubsection{Large P\'{e}clet number}
-Finally, solutions to Eqn.\eqref{eqn:AD} have been studied in the case of large $\mathbb{P}_e$. The result is reported in the following plot.
+Finally, solutions to Eqn.\eqref{eqn:AD} have been studied in the case of large $\mathbb{P}_e$. The results are reported in the following plot.
 
 \begin{figure}[H]
 	\begin{center}
@@ -454,7 +456,7 @@ Finally, solutions to Eqn.\eqref{eqn:AD} have been studied in the case of large 
 		\label{fig:P_10.5}}
 \end{figure}
 
-The choice of the values of $\alpha$and $\beta$ has been made through the following criterion.\\
+The choice of the values of $\alpha$ and $\beta$ has been made through the following criterion.\\
 A sufficient condition for the Gauss-Seidel method to converge is that the matrix $A$ which the algorithm has to invert is strictly diagonally dominant (see \cite{numerical-math}). In the present case, such a condition is satisfied if:
 
 $$\left\|\frac{2\alpha}{h^2}\right\|> \left\|\frac{\alpha}{h^2}+\frac{\beta}{2h}\right\| + \left\|-\frac{\alpha}{h^2}+\frac{\beta}{2h}\right\|$$
@@ -471,11 +473,11 @@ Hence, for $L=1$, remembering that $h=\frac{1}{J+1}$, one has that a sufficient 
 
 $$J>\mathbb{P}_e-1$$
 
-The choice of $\alpha=1$ and $\beta=21$ satisfy the above condition. It was explicitly checked during the construction of the program that the choice of a great $\beta$ (e.g. $\beta=1000$) does not allow the algorithm to converge and the program exits with an appropriate warning to the user. Clearly, large values of $\beta$ can be tested with large enough $J$, so that the previous inequality is satisfied.\\
+The choice of $\alpha=1.0$ and $\beta=21.0$ satisfy the above condition. It was explicitly checked during the construction of the program that the choice of a great $\beta$ (e.g. $\beta=1000$) does not allow the algorithm to converge and the program exits with an appropriate warning to the user. Clearly, large values of $\beta$ can be tested with $J$ large enough to make the previous inequality satisfied.\\
 
 \subsection{Error analysis and order of convergence}
-As required by the assignment, errors on the solution have been computed and analysed. Not surprisingly, the distance between analytical and the approximate solution becomes smaller when the mesh size decreases.\\
-The study of such errors becomes of great importance to determine the order of convergence of the method. Assume the FD method here used is convergent of order p, then:
+\label{subsec:Error}
+As required by the assignment, solutions errors have been computed and analysed. Not surprisingly, the distance between analytical and the approximate solution becomes smaller when the mesh size decreases. The study of such errors becomes of great importance to determine the order of convergence of the method. Assume the FD method here used is convergent of order p, then:
 
 $$\left\|\frac{r_hu-u}{r_{\frac{h}{2}}u-u}\right\|_{\bar{\mathbb{U}}_h}=\frac{Ch^p+\mathcal{O}(h^{p+1})}{C\left(\frac{h}{2}\right)^p+\mathcal{O}(h)^{p+1}}= 2^p+\mathcal{O}(h)$$
 
@@ -488,21 +490,19 @@ Passing to the logarithms:
 
 The order of convergence of a method can thus be evaluated by means of studying the behaviour of the distance in the $\bar{\mathbb{U}}_h$ norm between the discretised and the exact solution to a given problem.\\
 The choice of progressively reducing by a factor 2 the values of $h$ (see Eqn.\eqref{eqn:h-choice}) should now appear clear: such a choice guarantees that the data are uniformly distributed on a logarithmic scale, which, in turn, makes the analysis of the errors simpler.\\
-As already mentioned, in the present case the $L_{\infty}$ norm (or discrete $L_\infty$) has been chosen: being that consistency, convergence and stability are norm dependent properties, every result presented in the following has to be interpreted as referred to this particular choice.\\
-
-A systematic study of the error for different P\'{e}clet numbers and different mesh sizes has been made. The obtained results are summarised in the following plot.\\
+As already mentioned, in the present case the (discrete) $L_{\infty}$ (see \cite{lec-notes}) norm has been chosen: being that consistency, convergence and stability are norm dependent properties, every result presented in the following has to be interpreted as referred to this particular choice.\\
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=1.0\textwidth]{ADRer.pdf}
 	\end{center}
-	\caption{Graphical representation of the error between the exact and the approximate solution of Eqn.\eqref{eqn:AD} for different P\'{e}clet numbers on a log-log scale. The analytical profile $h^2$, computed at the values of $h$ used in the different tests, has been inserted in the plot to allow an immediate comparison with the empirical profile obtained.
+	\caption{Graphical representation of the error between the exact and the approximate solution of Eqn.\eqref{eqn:AD} for different P\'{e}clet numbers on a log-log scale. The analytical profile $h^2$, computed at the mesh sizes used in the different tests, has been inserted in the plot to allow an immediate comparison with the empirical profile obtained.
 		\label{fig:errors}}
 \end{figure}
 
 Fig.\ref{fig:errors} shows a clear dependence of the error empirical profiles on the P\'{e}clet number. In particular, it is apparent that when $\mathbb{P}_e<<1$ the error scale uniformly on a logarithmic scale with respect to h.\\
 For $\mathbb{P}_e\ge 1$ the empirical profiles become very similar to the analytical $h^2$ one, suggesting that the order of convergence of the method is equal to 2. The curve obtained in the case of $\mathbb{P}_e=1$ shows another interesting feature, i.e. the presence of a \emph{plateau} for small $h$ values. This is, however, not surprisingly: the error cannot become arbitrarly small when the mesh size decreases and a saturation of the performances of the method for small enough $h$ is expected. As a matter of fact, a saturation for large values of the mesh size is expected as well: such a region, however, is not extremely interesting from a numerical point of view (it is just signalling that the choice of the mesh size has not been made optimally) and has not been investigated.\\
-A more precise analysis can be performed looking at the content of the file \emph{Errors$\_$P$\_$numb$\_$10.500000.txt}, which is reported in the following:
+A more precise analysis can be performed through the data contained in the file \emph{Errors$\_$P$\_$numb$\_$10.500000.txt}, which is reported in the following:
 \\
 \\
 \\
@@ -547,66 +547,47 @@ From Eqn.\eqref{eqn:order-consistency} it is easy to see that the order consiste
 $$\left\|\frac{r_hu-u}{r_{\frac{h}{2}}u-u}\right\|\le\left\|\frac{\mathcal{L}_h[r_hu]-f_h}{\mathcal{L}_{\frac{h}{2}}\left[r_\frac{h}{2}u\right]-f_\frac{h}{2}}\right\|=\frac{Ch^p+\mathcal{O}(h^{p+1})}{C\left(\frac{h}{2}\right)^p+\mathcal{O}(h)^{p+1}}= 2^p+\mathcal{O}(h)$$
 
 
-
-
-
-
-
-
-
-
 \section{Conclusive remarks}
 In this section some additional comments and observation are presented.
 
 \subsection{Memory}
-When dynamically allocating memory, one has always to make sure to free the reserved locations as soon as they are no longer needed. With the help of the software \emph{valgrind}, possible memory leaks have been checked. To do this, is it necessary to compile with \emph{-g} and \emph{-O1} optimisation. After having compiled the program, the following instruction has been used:
+As for the previous assignment, possible memory leaks have been checked.with the help of the software \emph{valgrind}, To do this, it is necessary to compile with \emph{-g} and \emph{-O1} optimisation. After having compiled the program, the following instruction has been used:
 
-\begin{verbatim}
-$ valgrind --leak-check=yes ./sparsematrix
-\end{verbatim}
+
+\begin{lstlisting}
+$ valgrind --leak-check=yes ./adr
+\end{lstlisting}
+
 
 The following output has been produced on the terminal:
 
 \begin{verbatim}
-==4200== Memcheck, a memory error detector
-==4200== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==4200== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==4200== Command: ./sparsematrix
-==4200== 
-==4200== 
-==4200== HEAP SUMMARY:
-==4200==     in use at exit: 0 bytes in 0 blocks
-==4200==   total heap usage: 1,252,428 allocs, 1,252,428 frees, 989,616,540 bytes allocated
-==4200== 
-==4200== All heap blocks were freed -- no leaks are possible
-==4200== 
-==4200== For counts of detected and suppressed errors, rerun with: -v
-==4200== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==31379== Memcheck, a memory error detector
+==31379== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==31379== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==31379== Command: ./adr
+==31379==
+==31379== HEAP SUMMARY:
+==31379==     in use at exit: 0 bytes in 0 blocks
+==31379==   total heap usage: 244,730 allocs, 244,730 frees, 130,033,803 bytes allocated
+==31379==
+==31379== All heap blocks were freed -- no leaks are possible
+==31379==
+==31379== For counts of detected and suppressed errors, rerun with: -v
+==31379== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 \end{verbatim}
 
-One can clearly see that no memory has been lost, so that everything has been deleted correctly. \\
-It may seem a little strange at fist that all the heap blocks were freed, even though no explicit call to the destructor has been made. However, all instances are built by the function Gauss$\_$Seidel$\_$test, so that the deletion is automatically performed every time the programs exits the function.\\
-The absence of memory leaks is however non trivial, since it proves that the destructor has been constructed correctly. This can be explicitly checked by means of commenting out the last two lines of the destructor: if \emph{valgrind} is called again, some memory leak will be found.\\ 
-
+One can clearly see that no memory has been lost. This is however not surprising since no memory was dynamically allocated by the program and the correctness of the constructor for the SparseMatrix class was checked in the previous assignment.\\
 
 \subsection{Performances}
 \label{subsec:perf}
-In order to test performance, the following instructions have been used\footnote{The test has been performed only on the part of the code concerned with the test over different $\lambda$ and $\delta$, commenting out the part on different $N$ in the main file. }:
+Performances can be checked through the following commands:
 \begin{verbatim}
-$ valgrind --tool=callgrind ./sparsematrix
+$ valgrind --tool=callgrind ./adr
 $ kcachegrind
 \end{verbatim}
 
-The first command analyses the perfomances in the terms of load distrubution, while \emph{kcachegrind} is used to visualise the load distribution results. Results are reported in the following screenshot.
-
-
-It is clear that a better efficiency could have been obtained if the program had not relied so much on the \emph{getValue} function, which is not particularly efficient.\\
-
-\subsubsection{Possible solutions}
-A possible way to optimise the code is to sort the indexes and values as soon as they are entered, so that each index can be associated to the corresponding value in a unique way and without the necessity to call a the \emph{getValue}. Such a solution, however, has not been implemented, since even though it is clearly more efficient for the matrix given in the assignment, it is not immediately clear how faster and optimised the code could become in the case of denser sparse matrix. On the other hand, it is still reasonable to expect that such a choice will make the program faster, since the sorting takes place only at the beginning of the program and \emph{getValue} is called a large number of times during the iterations.\\
-Possibly, the best solution is to store the values and the indexes by means of the \emph{insert} function instead that through a \emph{push$\_$back}: this way, the values
- will be automatically sorted.\\
-
+The first command analyses the perfomances in the terms of load distrubution, while \emph{kcachegrind} is used to visualise the load distribution results. Differently from the previous case, performances depend on the code of the first assignment. The functions called within \emph{ADR$\_$Test} and \emph{Solver} are the ones taking up the majority of the time needed: unsurprisingly, \emph{Gauss-Seidel} is the most ``time-consuming" of them.\\
 
 
 \cleardoublepage

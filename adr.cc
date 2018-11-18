@@ -273,7 +273,7 @@ void ADR_Test (std::vector<unsigned int>& Jvec, double const alpha, double const
   {
     Adr eq = Adr(Jvec[j], alpha, beta, gamma, L, u0, uL);
     std::vector<double> u_x(Jvec[j]); //initial guess
-    eq.Solver(u_x, tol, itCheck, MaxIter);
+    eq.Solver(u_x, tol, itCheck, MaxIter); //solves the equation
     error = LinfNorm( vectorSub( u_x, eq.An_sol( ) ) ); //Linf is defined in SparseMatrix
     err_ratio = err_old/error;
     err_old = error;
