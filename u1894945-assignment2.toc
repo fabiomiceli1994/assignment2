@@ -12,10 +12,10 @@
 \contentsline {subsection}{\numberline {2.3}Testing correctness}{7}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Results of the tests}{8}{subsection.2.4}
 \contentsline {subsubsection}{\numberline {2.4.1}Solutions to the AD equation}{8}{subsubsection.2.4.1}
-\contentsline {subsubsection}{\numberline {2.4.2}Small P\'{e}clet numbers}{8}{subsubsection.2.4.2}
-\contentsline {subsubsection}{\numberline {2.4.3}P\'{e}clet number close or equal to 1}{10}{subsubsection.2.4.3}
-\contentsline {subsubsection}{\numberline {2.4.4}Large P\'{e}clet number}{11}{subsubsection.2.4.4}
-\contentsline {subsection}{\numberline {2.5}Error analysis and order of convergence}{13}{subsection.2.5}
-\contentsline {section}{\numberline {3}Conclusive remarks}{15}{section.3}
-\contentsline {subsection}{\numberline {3.1}Memory}{15}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Performances}{16}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {2.4.2}Small P\'{e}clet numbers}{9}{subsubsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.3}P\'{e}clet number close or equal to 1}{11}{subsubsection.2.4.3}
+\contentsline {subsubsection}{\numberline {2.4.4}Large P\'{e}clet number}{12}{subsubsection.2.4.4}
+\contentsline {subsection}{\numberline {2.5}Error analysis and order of convergence}{14}{subsection.2.5}
+\contentsline {section}{\numberline {3}Conclusive remarks}{16}{section.3}
+\contentsline {subsection}{\numberline {3.1}Memory}{16}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Performances}{17}{subsection.3.2}

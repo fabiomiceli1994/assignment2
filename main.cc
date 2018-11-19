@@ -16,6 +16,7 @@ int main()
 
 {
 
+  //std::vector<unsigned int> Jvec = {9, 19, 39, 79};
   std::vector<unsigned int> Jvec = {9, 19, 39, 79, 159, 319, 639}; //different values of J for testing
   std::vector<double> alpha = {1., 1000., 5., 0.25, 1.}; //values of alpha for testing
   std::vector<double> beta = {0., 1., 0.1, 0.5, 21.}; // values of beta for testing

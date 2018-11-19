@@ -120,13 +120,13 @@ Student Number: 1894945
 		\mathcal{L}[u]=f\hspace{3mm}in\hspace{1mm}\Omega,\hspace{15mm}u=v\hspace{3mm}on\hspace{1mm}\partial\Omega
 	\end{equation}
 	
-	for $\mathcal{L}[u]=-\Delta u(x) + \mathbf{p}(x)\nabla u(x) + q(x)u(x)$, with $\mathbf{p}$ and $q$ given, smooth functions. 
+	for $\mathcal{L}[u]=-\Delta u(x) + \mathbf{p}(x)\cdot\nabla u(x) + q(x)u(x)$, with $\mathbf{p}$ and $q$ given, smooth functions. 
 \end{definition}
 
 BVPs like this one are called Dirichlet problems. In what follows, for simplicity, everything will be referred to the case $d=1$. 
 
 \subsection{Finite difference methods}
-The discretisations that will be consider in the following are based on the finite difference (FD) approach. The spatial operator $\mathcal{L}$ is evaluated at a set of points $\lbrace x_j\rbrace_{j=1}^{J}$ and the derivatives are replaced with difference quotients of the approximate solution u, which are in turn obtained by truncating (at the desired order of accuracy) the Taylor expansions of the exact solution u(x) around the point $x_j$, $j\in\lbrace1,\cdots, J\rbrace$.\\
+The discretisations that will be considered in the following are based on the finite difference (FD) approach. The spatial operator $\mathcal{L}$ is evaluated at a set of points $\lbrace x_j\rbrace_{j=1}^{J}$ and the derivatives are replaced with difference quotients of the approximate solution $ u $, which are in turn obtained by truncating (at the desired order of accuracy) the Taylor expansions of the exact solution $ u(x) $ about the point $x_j$, $j\in\lbrace1,\cdots, J\rbrace$.\\
 
 Let $\lbrace x_j\rbrace_{j=0}^{J+1}$ be a partition of the interval $[0, L]$, $L\in\mathbb{R}^+$, such that $0=x_0<x_1<\cdots<x_{J+1}=L$. The $j^{th}$ interval will be denoted by $I_j=(x_{j-1}, x_j)$ with mesh size $h_j=|I_j|$. For simplicity, a uniform mesh size will be considered and denoted by $h$, so that $x_j=jh$.\\
 Moreover let $u_j$ represents the approximation to the exact solution $u(x_j)$. Then, a simple discrete version of the operator $\Delta$ in \eqref{eqn:BVP} is, for $j=\lbrace 1, \cdots, J\rbrace$, given by:
@@ -136,7 +136,7 @@ Moreover let $u_j$ represents the approximation to the exact solution $u(x_j)$. 
 	\Delta[u]=\frac{u_{j+1}-2u_j+u_{j-1}}{h^2}
 \end{align}
 
-Similarly, the operator $\nabla [u]$ can be discretised as :
+Similarly, the operator $\nabla [u]$ can be discretised as:
 
 \begin{align}
 \label{eqn:finite-diff-grad}
@@ -189,11 +189,11 @@ Clearly, the discrete problem \eqref{eqn:BVP-discrete} can be now stated as:
 	\label{eqn:BVP-general-discr}
 \end{equation}
 $$\bar{\mathcal{L}}_h[u]=f_h$$
-where $\mathcal{L}_h:\bar{\mathbb{U}}_h\rightarrow\mathbb{U}_h$ represents both the discretisation of the the different operators involved in Eqn.\eqref{eqn:BVP} and the boundary conditions and $f_h\in\mathbb{U}_h$ is given by $[r_hf]$.\\
+where $\mathcal{\bar{L}}_h:\bar{\mathbb{U}}_h\rightarrow\mathbb{U}_h$ represents both the discretisation of the the different operators involved in Eqn.\eqref{eqn:BVP} and the boundary conditions and $f_h\in\mathbb{U}_h$ is given by $[r_hf]$.\\
 
 \begin{definition}
 	\label{defn:consistency}
-	The consistency error of the method \eqref{eqn:BVP-general-discr} relative to the exact solution u(x) in a suitable discrete norm (see \cite{lec-notes}) is:
+	The consistency error of the method \eqref{eqn:BVP-general-discr} relative to the exact solution $ u(x) $ in a suitable discrete norm (see \cite{lec-notes}) is:
 	$$e_c=||\bar{\mathcal{L}}_h[r_hu]-f_h||_{\mathbb{U}_h} $$
 	The discretisation is said to be \emph{consistent} if: 
 	\begin{equation}
@@ -255,14 +255,12 @@ The problem can be formulated as follows. Given $f\in C([0, L])$, find $u\in C^2
 for $a, b, p, q\in\mathbb{R}$. \\
 
 Just as the general method previously introduced, the problem can be represented in the matrix form:
-
 \begin{align}
 	\label{eqn:matrix-form}
 	A\mathbf{u}=\mathbf{f}
 \end{align}
 
-where $\mathbf{u}=(u_1, \cdots, u_J)^{T}$, $\mathbf{f}=(f(x_1),\cdots , f(x_J))^{T}$. In this context, the entries of $A$ are given by:
-
+where $\mathbf{u}=(u_1, \cdots, u_J)^{T}$, $\mathbf{f} \in \mathbb{R}^{J \times J}$. In this context, the entries of $A$ are given by:
 \begin{align}
 	\label{eqn:matrix}
 	a_{ij} = \begin{cases}
@@ -272,6 +270,17 @@ where $\mathbf{u}=(u_1, \cdots, u_J)^{T}$, $\mathbf{f}=(f(x_1),\cdots , f(x_J))^
 	0, &\text{otherwise}
 	\end{cases}
 \end{align}
+and of $ \mathbf{f} $
+\begin{align*}
+\mathbf{f} = 
+\begin{pmatrix}
+f(x_1) + u_0\left(-\frac{\alpha}{h^2}+\frac{\beta}{2h}\right)\\
+f(x_2)\\
+\vdots\\
+f(x_{J-1})\\
+f(x_J) + u_{L}\left(-\frac{\alpha}{h^2}-\frac{\beta}{2h}\right)\\		
+\end{pmatrix}
+\end{align*}
 	
 In this way, differential equations can be solved through the methods used in numerical linear algebra.\\
 
@@ -324,7 +333,7 @@ In this case, the relevant parameter to the study of the dominance of the advect
 The program is built on the class ADR , which stands for Advection-Diffusion-Reaction. The class has 7 private variables: $J$ (the number of points in the interior of $[0,L]$), $\alpha$, $\beta$, $\gamma$ (the parameters associated to the ADR equation at hand), $L$ (the length of the interval), $u_0$ (the boundary condition at $0$) and $u_L$ (boundary condition at $L$). In this way, once the constructor is called, all the variables and parameters defining problem \eqref{eqn:ass-prob} are set.\\
 As pointed out in $\S$\ref{subsec:the-present-case}, BVPs can be solved through numerical methods for linear algebra: the member function \emph{MatrixBuild}, which accepts no argument, constructs matrix $A$ of Eqn.\eqref{eqn:matrix-form}, which will be later inverted through the Gauss-Seidel algorithm. Such a construction takes place within the function \emph{Solver}, that performs the tests required by the assignment instructions through the Gauss-Seidel method and outputs the results on different .txt files. For clarity reasons,  each time a simulation is performed, a suitable success message containing the different parameters of the corresponding test, is printed on the terminal. \emph{Solver} is a member function which accepts 4 arguments and implicitly returns the discretised solution \emph{u$\_$x}. The argument \emph{itCheck} represents the number of iterations after which a check for stagnation of the method is performed, while \emph{MaxIter} represents the maximum number of iterations the user is willing ``wait" and \emph{tol} the given tolerance.\\ 
 The member function \emph{An$\_$sol} outputs the analytical solutions at each point of $\Omega_h$, by simply computing either Eqn.\eqref{eqn:AD-sol} or Eqn.\eqref{eqn:DR-sol} at the given set of points. The choice between the two solutions is made by means of an \emph{if} instruction, checking if $\alpha\neq 0, \gamma=0$ or if $\alpha\neq 0, \beta=0$. The special case $\alpha\neq 0, \beta=0, \gamma=0$ is checked as well. If none of the above conditions is satisfied, the program exits with an appropriate error message to the user.\\
-Discretised and the analytical solutions are finally compared within the function \emph{ADR$\_$Test}. Such a function take as arguments the values of the private variables, the arguments of $Solver$ and the different values of $J$ the user wants to test on. The function loops over them and prints the final error between the numerical solution and the analytical one, in the $L_\infty$ norm, on suitable .txt files, whose names are defined through the parameters the user has set for the test. The logarithm of the ratio between errors obtained for different mesh sizes is computed and printed, too.\\
+Discretised and the analytical solutions are finally compared within the function \emph{ADR$\_$Test}. Such a function takes as arguments the values of the private variables, the arguments of $Solver$ and the different values of $J$ the user wants to test on. The function loops over them and prints the final error between the numerical solution and the analytical one, in the $L_\infty$ norm, on suitable .txt files, whose names are defined through the parameters the user has set for the test. The logarithm of the ratio between errors obtained for different mesh sizes is computed and printed, too.\\
 Since, by means of simply changing the values provided in the main file, both class of equations can be tested with no further modifications to the code, the program can be regarded as particularly flexible.\\
 
 \subsection{Running the program}
@@ -351,6 +360,7 @@ f[J_-1] = uL_*( ( alpha_/(h*h) ) - ( beta_/(2*h) ) ); //second boundary conditio
 Eqn.(\ref{eqn:matrix-form}) then reads:
 
 \begin{align*}
+\hspace{-30pt}
 	\begin{pmatrix}
 	\frac{2\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h} & 0 & 0 & 0 & \cdots & 0 & 0\\
 	-\frac{\alpha}{h^2}+\frac{\beta}{2h} & \frac{2\alpha}{h^2}+\gamma & -\frac{\alpha}{h^2}-\frac{\beta}{2h} & 0 & 0 & \cdots & 0 & 0\\
@@ -390,7 +400,6 @@ $$\mathbb{P}_e=\lbrace 0.0000, 0.0005, 0.0100, 1.0000, 10.5000 \rbrace$$
 The solutions $u(x)$ obtained for the different cases, indexed by the respective $J$, can be found in the files $P\_numb\_...\_Solution\_J\_....txt$ , where the dots stand for the different possible values of $\mathbb{P}_e$ and $J$. The residual error at every iteration, in the $L_\infty$ norm, is stored in the files $P\_numb\_...\_Residual\_J\_....txt$, which provide a direct proof of the general correctness of the code.\\
 Finally, the distance between the exact solution and the approximate one, in the $L_\infty$ is printed on \emph{Errors$\_$P$\_$numb$\_$...txt} files. Unsurprisingly, the error becomes smaller as the mesh size decreases.\\
 The correctness of the algorithm has been tested for different values of $h$, as required by the assignment. The values of the mesh size have been chosen to be:
-
 \begin{align}
 	\label{eqn:h-choice}
 	h=\lbrace10, 20, 40, 80, 160, 320, 640\rbrace
@@ -443,7 +452,7 @@ Solutions to Eqn.\eqref{eqn:AD} have been studied in the case $\alpha=0.25, \bet
 \end{figure}
 
 The exponential behaviour of the solution is now evident. In fact, in the present case, the Taylor expansion of the exponential function around 0 cannot be truncated after the first term being that $\frac{\beta}{\alpha}=1$.\\
-Solutions overlap in this case as well, but small differences between them are noticeable for big enough j: by means of a suitable zoom on the plot, it is possible to see that the red and blue curve present a slightly different profile.\\
+Solutions overlap in this case as well, but small differences between them are noticeable for big enough $ j $: by means of a suitable zoom on the plot, it is possible to see that the red and blue curve present a slightly different profile.\\
 
 \subsubsection{Large P\'{e}clet number}
 Finally, solutions to Eqn.\eqref{eqn:AD} have been studied in the case of large $\mathbb{P}_e$. The results are reported in the following plot.
@@ -479,7 +488,7 @@ The choice of $\alpha=1.0$ and $\beta=21.0$ satisfy the above condition. It was 
 \label{subsec:Error}
 As required by the assignment, solutions errors have been computed and analysed. Not surprisingly, the distance between analytical and the approximate solution becomes smaller when the mesh size decreases. The study of such errors becomes of great importance to determine the order of convergence of the method. Assume the FD method here used is convergent of order p, then:
 
-$$\left\|\frac{r_hu-u}{r_{\frac{h}{2}}u-u}\right\|_{\bar{\mathbb{U}}_h}=\frac{Ch^p+\mathcal{O}(h^{p+1})}{C\left(\frac{h}{2}\right)^p+\mathcal{O}(h)^{p+1}}= 2^p+\mathcal{O}(h)$$
+$$\left\|\frac{r_hu-u}{r_{\frac{h}{2}}u-u}\right\|_{\bar{\mathbb{U}}_h}=\frac{Ch^p+\mathcal{O}(h^{p+1})}{C\left(\frac{h}{2}\right)^p+\mathcal{O}(h^{p+1})}= 2^p+\mathcal{O}(h)$$
 
 Passing to the logarithms:
 
@@ -490,7 +499,7 @@ Passing to the logarithms:
 
 The order of convergence of a method can thus be evaluated by means of studying the behaviour of the distance in the $\bar{\mathbb{U}}_h$ norm between the discretised and the exact solution to a given problem.\\
 The choice of progressively reducing by a factor 2 the values of $h$ (see Eqn.\eqref{eqn:h-choice}) should now appear clear: such a choice guarantees that the data are uniformly distributed on a logarithmic scale, which, in turn, makes the analysis of the errors simpler.\\
-As already mentioned, in the present case the (discrete) $L_{\infty}$ (see \cite{lec-notes}) norm has been chosen: being that consistency, convergence and stability are norm dependent properties, every result presented in the following has to be interpreted as referred to this particular choice.\\
+As already mentioned, in the present case the (discrete) $L_{\infty}$ (see \cite{lec-notes}) norm has been chosen.\\
 
 \begin{figure}[H]
 	\begin{center}
@@ -500,8 +509,8 @@ As already mentioned, in the present case the (discrete) $L_{\infty}$ (see \cite
 		\label{fig:errors}}
 \end{figure}
 
-Fig.\ref{fig:errors} shows a clear dependence of the error empirical profiles on the P\'{e}clet number. In particular, it is apparent that when $\mathbb{P}_e<<1$ the error scale uniformly on a logarithmic scale with respect to h.\\
-For $\mathbb{P}_e\ge 1$ the empirical profiles become very similar to the analytical $h^2$ one, suggesting that the order of convergence of the method is equal to 2. The curve obtained in the case of $\mathbb{P}_e=1$ shows another interesting feature, i.e. the presence of a \emph{plateau} for small $h$ values. This is, however, not surprisingly: the error cannot become arbitrarly small when the mesh size decreases and a saturation of the performances of the method for small enough $h$ is expected. As a matter of fact, a saturation for large values of the mesh size is expected as well: such a region, however, is not extremely interesting from a numerical point of view (it is just signalling that the choice of the mesh size has not been made optimally) and has not been investigated.\\
+Fig.\ref{fig:errors} shows a clear dependence of the error empirical profiles on the P\'{e}clet number. In particular, it is apparent that when $\mathbb{P}_e<<1$ the error scale uniformly on a logarithmic scale with respect to $ h $.\\
+For $\mathbb{P}_e\ge 1$ the empirical profiles become very similar to the analytical $h^2$ one, suggesting that the order of convergence of the method is equal to 2. The curve obtained in the case of $\mathbb{P}_e=1$ shows another interesting feature, i.e. the presence of a \emph{plateau} for small $h$ values. This is, however, is not surprising: the error cannot become arbitrarly small when the mesh size decreases and a saturation of the performances of the method for small enough $h$ is expected. As a matter of fact, a saturation for large values of the mesh size is expected as well: such a region, however, is not extremely interesting from a numerical point of view (it is just signalling that the choice of the mesh size has not been made optimally) and has not been investigated.\\
 A more precise analysis can be performed through the data contained in the file \emph{Errors$\_$P$\_$numb$\_$10.500000.txt}, which is reported in the following:
 \\
 \\
@@ -532,20 +541,7 @@ By means of computing the empirical mean and standard error of the numerical res
 \end{align} 
 
 where $O_c$ represents the order of convergence of the method.\\
-The result is justifiable through Thm.\ref{thm:stab-conv}, which, as already pointed out, shows that, for stable methods, the order of convergence is at least the order of consistency of the method.\\
-From Eqn.\eqref{eqn:order-consistency} it is easy to see that the order consistency of the method is 2. However, the stability has not been proven yet. The following theorem provides a sufficient condition for the stability of the method:
-
-\begin{theorem}
-	\label{thm:stability-thm}
-	Let $A\in\mathbb{R}^{N\times N}$ be an $M-matrix$ and assume there exists a vector $\Phi\in\mathbb{R}^{N}$ with $\Phi>0$ and $A\Phi >0$. Then:
-	
-	$$||x||_{\infty, h}\le C_\Phi||Ax||_{\infty, h}, \hspace{5mm}C_\Phi=\frac{\max\limits_{i}\Phi}{\min\limits_{i} A\Phi},\hspace{3mm} i>0\in\lbrace 1,\cdots, N\rbrace$$
-\end{theorem}
-
-
-
-$$\left\|\frac{r_hu-u}{r_{\frac{h}{2}}u-u}\right\|\le\left\|\frac{\mathcal{L}_h[r_hu]-f_h}{\mathcal{L}_{\frac{h}{2}}\left[r_\frac{h}{2}u\right]-f_\frac{h}{2}}\right\|=\frac{Ch^p+\mathcal{O}(h^{p+1})}{C\left(\frac{h}{2}\right)^p+\mathcal{O}(h)^{p+1}}= 2^p+\mathcal{O}(h)$$
-
+The result is justifiable through Thm.\ref{thm:stab-conv}, which, as already pointed out, shows that, for stable methods, the order of convergence is at least the order of consistency of the method.
 
 \section{Conclusive remarks}
 In this section some additional comments and observation are presented.
