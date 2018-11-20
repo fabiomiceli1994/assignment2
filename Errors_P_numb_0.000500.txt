@@ -1,9 +1,0 @@
-#Details of numerical method for ADR equation through Gauss-Seidel algorithm for alpha=1000, beta=1, gamma=0.
-#1-Mesh size             2-Error (LinfNorm)       3-log2(Error Ratios)     
-0.1                      9.14605e-11              	                        
-0.05                     9.967e-11                -0.124011                
-0.025                    1.00407e-10              -0.0106281               
-0.0125                   1.01224e-10              -0.0116949               
-0.00625                  1.01121e-10              0.00147391               
-0.003125                 1.00765e-10              0.00509349               
-0.0015625                9.61137e-11              0.068174                 
